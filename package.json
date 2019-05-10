@@ -1,0 +1,23 @@
+{
+  "name": "webpush_salesforce_node_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DimitarNikolaevVasilev/PushIntegration.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DimitarNikolaevVasilev/PushIntegration/issues"
+  },
+  "homepage": "https://github.com/DimitarNikolaevVasilev/PushIntegration#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}

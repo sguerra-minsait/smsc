@@ -1,0 +1,69 @@
+{
+		"workflowApiVersion": "1.1",
+		"metaData": {
+			"version": "1.0",
+			"icon": "images/icon.png",
+			"category": "message"
+		},
+		"type": "REST",
+		"lang": {
+			 "en-US": {
+					 "name": "SMSC Push Integration",
+					 "description": "Esqueleto de integración con SMSC"
+			 }
+		},
+		"arguments": {
+				"execute": {
+						"inArguments": [],
+						"outArguments": [
+						],
+						"url": "https://pushintegration.herokuapp.com/execute",
+						"useJwt": true,
+						"body": "",
+						"method": "POST"
+				}
+		},
+		"configurationArguments": {
+			"applicationExtensionKey": "486ad3cc-bc11-44d3-89f0-08eb27820948",
+			 "save": {
+					 "url": "https://pushintegration.herokuapp.com/save",
+					 "verb": "POST",
+					 "body": "",
+					 "useJwt": true
+			 },
+			 "publish": {
+					 "url": "https://pushintegration.herokuapp.com/publish",
+					 "verb": "POST",
+					 "body": "",
+					 "useJwt": true
+			 },
+			 "validate": {
+					 "url": "https://pushintegration.herokuapp.com/validate",
+					 "verb": "POST",
+					 "body": "",
+					 "useJwt": true
+			 }
+		},
+		"wizardSteps": [
+			 { "label": "Template", "key": "template" },
+			 { "label": "Devivery options", "key": "delivery" },
+			 { "label": "Testing", "key": "testing" }			 
+		],
+		"userInterfaces": {
+			 "configModal": {
+					 "height": 600,
+					 "width": 700,
+					 "fullscreen": false
+			 }
+		},
+		"schema": {
+				"arguments": {
+						"execute": {
+								"inArguments": [
+								],
+								"outArguments": [
+								]
+						}
+				}
+		}
+}
