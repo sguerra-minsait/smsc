@@ -72,6 +72,7 @@
 				if($('#footer').val().length > 2)errors('fill your footer');
 			break;
 		}
+		return errors;
 	}
 
 	function onClickedNext () {
