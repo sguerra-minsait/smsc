@@ -4,7 +4,6 @@
 	var payload = {};
 	var lastStepEnabled = false;
 	var step = 1;
-	var heroku_url = "https://webpushnodejstest.herokuapp.com";
 
 
 	$(window).ready(onRender);
@@ -27,18 +26,12 @@
 		switch(step) {
 			case 1:
 				$('#template').show();
-				//connection.trigger('updateButton', { button: 'next', text: 'next', enabled:true });
-				//connection.trigger('updateButton', { button: 'back', visible: false });
 				break;
 			case 2:
 				$('#delivery').show();
-				//connection.trigger('updateButton', { button: 'back', visible: true });
-				//connection.trigger('updateButton', { button: 'next', text: 'next', visible: true });
 				break;
 			case 3:
 				$('#testing').show();
-				//connection.trigger('updateButton', { button: 'back', visible: true });
-				//connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
 				break;
 			case 4:
 				save();
@@ -65,8 +58,32 @@
 			$('#' + name).val(inArguments[name]);
 		}
 	}
+	function validate_step(step){
+		var errors = [];
+		switch(step){
+			case 1:
+				if($('#message').val().length > 2)errors.push('fill your message');
+				if($('#footer').val().length > 2)errors('fill your footer');
+			break;
+			case 2:
+				var date = new Date($('#maintain_date_value').val());
+				date.setMonth(date.getMonth() - 1);
+				if(date.getTime() < new Date().getTime())errors.push('Invalid date');
+				if($('#footer').val().length > 2)errors('fill your footer');
+			break;
+		}
+	}
 
 	function onClickedNext () {
+		var errors = validate_step(step)
+		if(errors.length){
+			var r = '<ul class="errors">';
+			for(let i = 0;i<errors.length;i++){
+				r += '<li>' + errors[i] + '</li>'
+			}
+			r += '</ul>';
+			return $('#error_box').html(r);
+		}
 		step++;
 		gotoStep(step);
 		connection.trigger('nextStep');

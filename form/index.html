@@ -11,7 +11,6 @@
 <script type="text/javascript" src="js/custom_calendar.js"></script>
 <link rel="stylesheet" type="text/css" href="css/salesforce-lightning-design-system.min.css">
 
-
 <style type="text/css">
 	html{
 		background: white;
@@ -54,87 +53,99 @@
 					<path d="M4.4 15.4l4.1 4.1c.2.2.5.2.6 0L19.4 9.2c.2-.2.2-.4 0-.6l-4.1-4.1c-.2-.2-.4-.2-.6 0L4.4 14.8c-.2.2-.2.5 0 .6zM16.7 2.6c-.2.2-.2.5 0 .7l4 4c.2.2.5.2.7 0l1.1-1.1c.8-.7.8-1.8 0-2.6l-2.1-2.1c-.8-.8-1.9-.8-2.7 0l-1 1.1zM1 22.2c-.1.5.3.9.8.8l5-1.2c.2 0 .3-.1.4-.2l.1-.1c.1-.1.1-.4-.1-.6l-4.1-4.1c-.2-.2-.5-.2-.6-.1l-.1.1c-.1.1-.2.3-.2.4l-1.2 5z"></path>
 				</svg>
 			</svg>
-			<div><input type="text" id="footer" class="slds-input slds-input_bare slds-p-around_none"></div>
+			<div><input type="text" id="footer" maxlength="100" class="slds-input slds-input_bare slds-p-around_none"></div>
 		</div>
 	</div>
 </div>
 
 
 <div id="delivery" class="step">
-<div id="maintain_date">
-  <div class="slds-form-element slds-dropdown-trigger slds-dropdown-trigger_click">
-	<label class="slds-form-element__label" for="date-input-id">Maintain until</label>
-	<div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right custom_calendar_input_container">
-	  <input type="text" placeholder=" " class="slds-input" value="" />
-	  <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Select a date">
-		<svg class="slds-button__icon" aria-hidden="true">
-		  <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#event"></use>
-		</svg>
-		<span class="slds-assistive-text">Select a date</span>
-	  </button>
-	</div>
-	<div aria-hidden="false" aria-label="Date picker: June" class="slds-datepicker slds-dropdown slds-dropdown_left" role="dialog">
-	  <div class="slds-datepicker__filter slds-grid">
-		<div class="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
-		  <div class="slds-align-middle">
-			<button class="slds-button slds-button_icon slds-button_icon-container custom_prev_month" title="Previous Month">
-			  <svg class="slds-button__icon" aria-hidden="true">
-				<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#left"></use>
-			  </svg>
-			  <span class="slds-assistive-text ">Previous Month</span>
-			</button>
-		  </div>
-		  <h2 aria-atomic="true" aria-live="assertive" class="slds-align-middle custom_month">June</h2>
-		  <div class="slds-align-middle">
-			<button class="slds-button slds-button_icon slds-button_icon-container custom_next_month" title="Next Month">
-			  <svg class="slds-button__icon" aria-hidden="true">
-				<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#right"></use>
-			  </svg>
-			  <span class="slds-assistive-text">Next Month</span>
-			</button>
-		  </div>
+	<div id="maintain_date">
+	  <div class="slds-form-element slds-dropdown-trigger slds-dropdown-trigger_click">
+		<label class="slds-form-element__label" for="date-input-id">Maintain until</label>
+		<div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right custom_calendar_input_container">
+		  <input type="text" placeholder=" " class="slds-input" value="" id="maintain_date_value" />
+		  <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Select a date">
+			<svg class="slds-button__icon" aria-hidden="true">
+			  <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#event"></use>
+			</svg>
+			<span class="slds-assistive-text">Select a date</span>
+		  </button>
 		</div>
-		<div class="slds-shrink-none">
-		  <label class="slds-assistive-text" for="maintain_date_year">Pick a Year</label>
-		  <div class="slds-select_container">
-			<select class="slds-select custom_year_select" id="maintain_date_year">
-			</select>
+		<div aria-hidden="false" aria-label="Date picker: June" class="slds-datepicker slds-dropdown slds-dropdown_left" role="dialog">
+		  <div class="slds-datepicker__filter slds-grid">
+			<div class="slds-datepicker__filter_month slds-grid slds-grid_align-spread slds-grow">
+			  <div class="slds-align-middle">
+				<button class="slds-button slds-button_icon slds-button_icon-container custom_prev_month" title="Previous Month">
+				  <svg class="slds-button__icon" aria-hidden="true">
+					<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#left"></use>
+				  </svg>
+				  <span class="slds-assistive-text ">Previous Month</span>
+				</button>
+			  </div>
+			  <h2 aria-atomic="true" aria-live="assertive" class="slds-align-middle custom_month">June</h2>
+			  <div class="slds-align-middle">
+				<button class="slds-button slds-button_icon slds-button_icon-container custom_next_month" title="Next Month">
+				  <svg class="slds-button__icon" aria-hidden="true">
+					<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#right"></use>
+				  </svg>
+				  <span class="slds-assistive-text">Next Month</span>
+				</button>
+			  </div>
+			</div>
+			<div class="slds-shrink-none">
+			  <label class="slds-assistive-text" for="maintain_date_year">Pick a Year</label>
+			  <div class="slds-select_container">
+				<select class="slds-select custom_year_select" id="maintain_date_year">
+				</select>
+			  </div>
+			</div>
 		  </div>
+		  <table aria-labelledby="month" aria-multiselectable="true" class="slds-datepicker__month" role="grid">
+			<thead>
+			  <tr class="weekdays">
+				<th scope="col">
+				  <abbr title="Sunday">Sun</abbr>
+				</th>
+				<th scope="col">
+				  <abbr title="Monday">Mon</abbr>
+				</th>
+				<th scope="col">
+				  <abbr title="Tuesday">Tue</abbr>
+				</th>
+				<th scope="col">
+				  <abbr title="Wednesday">Wed</abbr>
+				</th>
+				<th scope="col">
+				  <abbr title="Thursday">Thu</abbr>
+				</th>
+				<th scope="col">
+				  <abbr title="Friday">Fri</abbr>
+				</th>
+				<th scope="col">
+				  <abbr title="Saturday">Sat</abbr>
+				</th>
+			  </tr>
+			</thead>
+			<tbody class="custom_days_body">
+			</tbody>
+		  </table>
+		  <button class="slds-button slds-align_absolute-center slds-text-link custom_go_today">Today</button>
 		</div>
 	  </div>
-	  <table aria-labelledby="month" aria-multiselectable="true" class="slds-datepicker__month" role="grid">
-		<thead>
-		  <tr class="weekdays">
-			<th scope="col">
-			  <abbr title="Sunday">Sun</abbr>
-			</th>
-			<th scope="col">
-			  <abbr title="Monday">Mon</abbr>
-			</th>
-			<th scope="col">
-			  <abbr title="Tuesday">Tue</abbr>
-			</th>
-			<th scope="col">
-			  <abbr title="Wednesday">Wed</abbr>
-			</th>
-			<th scope="col">
-			  <abbr title="Thursday">Thu</abbr>
-			</th>
-			<th scope="col">
-			  <abbr title="Friday">Fri</abbr>
-			</th>
-			<th scope="col">
-			  <abbr title="Saturday">Sat</abbr>
-			</th>
-		  </tr>
-		</thead>
-		<tbody class="custom_days_body">
-		</tbody>
-	  </table>
-	  <button class="slds-button slds-align_absolute-center slds-text-link custom_go_today">Today</button>
 	</div>
-  </div>
-</div>
+	<div>
+		<div class="slds-select_container">
+			<select id="maintain_hour" class="select_time_picker">
+				<option>8 PM</option>	
+				<option>9 PM</option>	
+				<option>10 PM</option>	
+				<option>11 PM</option>
+				<option>12 PM</option>
+			</select>
+<span class="slds-icon_container slds-icon-utility-clock slds-input__icon slds-input__icon_right"><svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true"><use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#clock"></use></svg></span>
+		</div>
+	</div>
 	<div class="slds-form-element">
 		<label class="slds-form-element__label slds-text-title_caps click_event_label" for="type">Type</label>
 		<br>
@@ -173,7 +184,7 @@
 					<path d="M4.4 15.4l4.1 4.1c.2.2.5.2.6 0L19.4 9.2c.2-.2.2-.4 0-.6l-4.1-4.1c-.2-.2-.4-.2-.6 0L4.4 14.8c-.2.2-.2.5 0 .6zM16.7 2.6c-.2.2-.2.5 0 .7l4 4c.2.2.5.2.7 0l1.1-1.1c.8-.7.8-1.8 0-2.6l-2.1-2.1c-.8-.8-1.9-.8-2.7 0l-1 1.1zM1 22.2c-.1.5.3.9.8.8l5-1.2c.2 0 .3-.1.4-.2l.1-.1c.1-.1.1-.4-.1-.6l-4.1-4.1c-.2-.2-.5-.2-.6-.1l-.1.1c-.1.1-.2.3-.2.4l-1.2 5z"></path>
 				</svg>
 			</svg>
-			<div><input type="text" id="message" class="slds-input slds-input_bare slds-p-around_none"></div>
+			<div><input type="text" id="message" maxlength="160" class="slds-input slds-input_bare slds-p-around_none"></div>
 		</div>
 	</div>
 </div>
