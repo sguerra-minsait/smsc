@@ -22,7 +22,7 @@
 		background: white;
 	}
 	.step {
-		display: block;
+		display: none;
 	}
 	#template {
 		display: block;
@@ -47,7 +47,7 @@
 
 
 <div id="delivery" class="step">
-	<div id="maintain_date">
+	<div id="maintain_date" style="display: inline-block;">
 	  <div class="slds-form-element slds-dropdown-trigger slds-dropdown-trigger_click">
 		<label class="slds-form-element__label" for="date-input-id">Maintain until</label>
 		<div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right custom_calendar_input_container">
@@ -120,19 +120,20 @@
 		  <button class="slds-button slds-align_absolute-center slds-text-link custom_go_today">Today</button>
 		</div>
 	  </div>
-	</div>
 	<div style="display: inline-block;">
 		<div style="position: relative">
 			<select id="maintain_hour" class="select_time_picker">
-				<option>8 PM</option>	
-				<option>9 PM</option>	
-				<option>10 PM</option>	
+				<option>8 PM</option>
+				<option>9 PM</option>
+				<option>10 PM</option>
 				<option>11 PM</option>
 				<option>12 PM</option>
 			</select>
-<span class="slds-icon_container maintain_hour_icon slds-icon-utility-clock slds-input__icon slds-input__icon_right"><svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true"><use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#clock"></use></svg></span>
+		<span class="slds-icon_container maintain_hour_icon slds-icon-utility-clock slds-input__icon slds-input__icon_right"><svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true"><use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#clock"></use></svg></span>
 		</div>
 	</div>
+	</div>
+
 	<div class="slds-form-element">
 		<label class="slds-form-element__label slds-text-title_caps click_event_label" for="type">Type</label>
 		<br>
