@@ -1,5 +1,6 @@
 class CustomCalendar{
 	constructor(date, c){
+		this.months_names =  ['January','February','March','April','May','June','July','August','September','October','November','December'];
 		this.container = date;
 		this.actual_date = new Date(c.year || new Date().getFullYear(), c.month || new Date().getMonth(), c.day || new Date().getDate());
 		this.divs = {
@@ -10,7 +11,8 @@ class CustomCalendar{
 			prev_month: date.find('.custom_prev_month'),
 			go_today: date.find('.custom_go_today'),
 			input_container: date.find('.custom_calendar_input_container'),
-			trigger_div: date.find('.slds-dropdown-trigger')
+			trigger_div: date.find('.slds-dropdown-trigger'),
+			hour_select: date.find('.select_time_picker')
 		}
 		var self = this;
 
@@ -26,15 +28,32 @@ class CustomCalendar{
 		for(var i = c.years.from; i <= c.years.to; i++){
 			this.divs.year.append($(`<option value="${i}">${i}</option>`));
 		}
+
 		this.total_days = c.today_days || 7 * 6;
 		this.update_input();
 		this.update_calendar();
 
 	}
 	update_calendar(month, year){
-		//this.update_actual_date();
 		month = month || this.actual_date.getMonth() + 1;
 		year = year || this.actual_date.getFullYear();
+
+
+		var options = this.divs.hour_select.find('option');
+		if(!this.equal_date(this.actual_date, new Date()) && options.length  != 24){
+			this.divs.hour_select.html('');
+			for(let i = 1;i<=12;i++){
+				this.divs.hour_select.append($(`<option value="${i}">${i} AM</option>`));
+			}
+			for(let i = 1;i<=12;i++){
+				this.divs.hour_select.append($(`<option value="${i+12}">${i} PM</option>`));
+			}
+		}else if(this.equal_date(this.actual_date, new Date())){
+			this.divs.hour_select.html('');
+			for(let i = new Date().getHours();i <= 24;i++){
+				this.divs.hour_select.append($(`<option value="${i}">${(i <= 12 ? i + ' AM' : (i-12) + ' PM')}</option>`));
+			}
+		}
 
 
 		this.divs.year.val(year);
@@ -69,6 +88,11 @@ class CustomCalendar{
 			});
 		}
 
+	}
+	equal_date(d1,d2){
+		return d1.getFullYear() == d2.getFullYear() &&
+			d1.getMonth() == d2.getMonth() &&
+			d1.getDate() == d2.getDate();
 	}
 	create_day(n, c){
 		var self = this;
@@ -133,5 +157,4 @@ class CustomCalendar{
 		this.actual_date = new Date();
 		this.update_calendar();
 	}
-	months_names =  ['January','February','March','April','May','June','July','August','September','October','November','December']
-}
+};
