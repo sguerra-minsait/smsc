@@ -10,6 +10,7 @@
 <script type="text/javascript" src="customActivity.js"></script>
 <script type="text/javascript" src="js/custom_calendar.js"></script>
 <link rel="stylesheet" type="text/css" href="css/salesforce-lightning-design-system.min.css">
+<link rel="stylesheet" type="text/css" href="css/main.css">
 
 <style type="text/css">
 	html{
@@ -21,7 +22,7 @@
 		background: white;
 	}
 	.step {
-		display: none;
+		display: block;
 	}
 	#template {
 		display: block;
@@ -31,29 +32,15 @@
 <body>
 <div id="template" class="step">
 	<div class="slds-form-element">
-		<label class="slds-form-element__label slds-text-title_caps" for="message">
-			Message
-		</label>
-		<div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right slds-border_bottom">
-			<svg class="slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default scm-anchor-right" aria-hidden="true">
-				<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="scm-anchor-right">
-					<path d="M4.4 15.4l4.1 4.1c.2.2.5.2.6 0L19.4 9.2c.2-.2.2-.4 0-.6l-4.1-4.1c-.2-.2-.4-.2-.6 0L4.4 14.8c-.2.2-.2.5 0 .6zM16.7 2.6c-.2.2-.2.5 0 .7l4 4c.2.2.5.2.7 0l1.1-1.1c.8-.7.8-1.8 0-2.6l-2.1-2.1c-.8-.8-1.9-.8-2.7 0l-1 1.1zM1 22.2c-.1.5.3.9.8.8l5-1.2c.2 0 .3-.1.4-.2l.1-.1c.1-.1.1-.4-.1-.6l-4.1-4.1c-.2-.2-.5-.2-.6-.1l-.1.1c-.1.1-.2.3-.2.4l-1.2 5z"></path>
-				</svg>
-			</svg>
-			<div><input type="text" id="message" class="slds-input slds-input_bare slds-p-around_none"></div>
+		<label class="slds-form-element__label" for="message">Message</label>
+		<div class="slds-form-element__control">
+			<textarea id="message" class="slds-textarea" maxlength="160" placeholder="Type your message"></textarea>
 		</div>
 	</div>
 	<div class="slds-form-element">
-		<label class="slds-form-element__label slds-text-title_caps" for="footer">
-			Footer
-		</label>
-		<div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right slds-border_bottom">
-			<svg class="slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default scm-anchor-right" aria-hidden="true">
-				<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="scm-anchor-right">
-					<path d="M4.4 15.4l4.1 4.1c.2.2.5.2.6 0L19.4 9.2c.2-.2.2-.4 0-.6l-4.1-4.1c-.2-.2-.4-.2-.6 0L4.4 14.8c-.2.2-.2.5 0 .6zM16.7 2.6c-.2.2-.2.5 0 .7l4 4c.2.2.5.2.7 0l1.1-1.1c.8-.7.8-1.8 0-2.6l-2.1-2.1c-.8-.8-1.9-.8-2.7 0l-1 1.1zM1 22.2c-.1.5.3.9.8.8l5-1.2c.2 0 .3-.1.4-.2l.1-.1c.1-.1.1-.4-.1-.6l-4.1-4.1c-.2-.2-.5-.2-.6-.1l-.1.1c-.1.1-.2.3-.2.4l-1.2 5z"></path>
-				</svg>
-			</svg>
-			<div><input type="text" id="footer" maxlength="100" class="slds-input slds-input_bare slds-p-around_none"></div>
+		<label class="slds-form-element__label" for="footer">Footer</label>
+		<div class="slds-form-element__control">
+			<input type="text" id="footer" placeholder="Type your footer" class="slds-input" />
 		</div>
 	</div>
 </div>
@@ -135,7 +122,7 @@
 	  </div>
 	</div>
 	<div>
-		<div class="slds-select_container">
+		<div style="position: relative">
 			<select id="maintain_hour" class="select_time_picker">
 				<option>8 PM</option>	
 				<option>9 PM</option>	
@@ -143,7 +130,7 @@
 				<option>11 PM</option>
 				<option>12 PM</option>
 			</select>
-<span class="slds-icon_container slds-icon-utility-clock slds-input__icon slds-input__icon_right"><svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true"><use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#clock"></use></svg></span>
+<span class="slds-icon_container maintain_hour_icon slds-icon-utility-clock slds-input__icon slds-input__icon_right"><svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true"><use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#clock"></use></svg></span>
 		</div>
 	</div>
 	<div class="slds-form-element">
@@ -175,7 +162,7 @@
 </div>
 <div id="testing" class="step">
 	<div class="slds-form-element">
-		<label class="slds-form-element__label slds-text-title_caps" for="message">
+		<label class="slds-form-element__label slds-text-title_caps" for="test_number">
 			Number
 		</label>
 		<div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right slds-border_bottom">
@@ -184,7 +171,7 @@
 					<path d="M4.4 15.4l4.1 4.1c.2.2.5.2.6 0L19.4 9.2c.2-.2.2-.4 0-.6l-4.1-4.1c-.2-.2-.4-.2-.6 0L4.4 14.8c-.2.2-.2.5 0 .6zM16.7 2.6c-.2.2-.2.5 0 .7l4 4c.2.2.5.2.7 0l1.1-1.1c.8-.7.8-1.8 0-2.6l-2.1-2.1c-.8-.8-1.9-.8-2.7 0l-1 1.1zM1 22.2c-.1.5.3.9.8.8l5-1.2c.2 0 .3-.1.4-.2l.1-.1c.1-.1.1-.4-.1-.6l-4.1-4.1c-.2-.2-.5-.2-.6-.1l-.1.1c-.1.1-.2.3-.2.4l-1.2 5z"></path>
 				</svg>
 			</svg>
-			<div><input type="text" id="message" maxlength="160" class="slds-input slds-input_bare slds-p-around_none"></div>
+			<div><input type="text" id="test_number" maxlength="20" class="slds-input slds-input_bare slds-p-around_none"></div>
 		</div>
 	</div>
 </div>
