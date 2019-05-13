@@ -62,8 +62,8 @@
 		var errors = [];
 		switch(step){
 			case 1:
-				if($('#message').val().length > 2)errors.push('fill your message');
-				if($('#footer').val().length > 2)errors('fill your footer');
+				if($('#message').val().length < 1)errors.push('fill your message');
+				if($('#footer').val().length < 1)errors('fill your footer');
 			break;
 			case 2:
 				var date = new Date($('#maintain_date_value').val());
@@ -83,12 +83,12 @@
 				r += '<li>' + errors[i] + '</li>'
 			}
 			r += '</ul>';
-			return $('#error_box').html(r);
+			$('#error_box').html(r);
+			return connection.trigger('ready');
 		}
 		step++;
 		gotoStep(step);
 		connection.trigger('nextStep');
-		connection.trigger('ready');
 	}
 
 	function onClickedBack () {
