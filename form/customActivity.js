@@ -80,14 +80,12 @@
 
 	function onClickedNext () {
 		step++;
-		gotoStep(step);
 		connection.trigger('nextStep');
 		connection.trigger('ready');
 	}
 
 	function onClickedBack () {
 		step--;
-		gotoStep(step);
 		connection.trigger('prevStep');
 		connection.trigger('ready');
 	}
@@ -104,7 +102,3 @@
 	}
 
 })();
-
-
-
-
