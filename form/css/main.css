@@ -1,8 +1,18 @@
 .select_time_picker{
+	display: inline-block;
+	padding: 5px 34px 4px 10px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	text-align: center;
 	background-color: #fff;
 	border: 1px solid #dddbda;
 	border-radius: .25rem;
-	width: 100%;
 	transition: border .1s linear,background-color .1s linear;
 	height: calc(1.875rem + (1px * 2));
+}
+.maintain_hour_icon{
+	position: absolute;
+	left: 61px;
+	top: 8px;
 }
