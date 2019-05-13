@@ -63,13 +63,13 @@
 		switch(step){
 			case 1:
 				if($('#message').val().length < 1)errors.push('fill your message');
-				if($('#footer').val().length < 1)errors('fill your footer');
+				if($('#footer').val().length < 1)errors.push('fill your footer');
 			break;
 			case 2:
 				var date = new Date($('#maintain_date_value').val());
 				date.setMonth(date.getMonth() - 1);
 				if(date.getTime() < new Date().getTime())errors.push('Invalid date');
-				if($('#footer').val().length > 2)errors('fill your footer');
+				if($('#footer').val().length > 2)errors.push('fill your footer');
 			break;
 		}
 		return errors;
