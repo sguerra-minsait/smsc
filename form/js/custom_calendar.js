@@ -114,10 +114,12 @@ class CustomCalendar{
 	}
 	next_month(){
 		this.actual_date.setMonth(this.actual_date.getMonth() + 1);
+		this.update_input();
 		this.update_calendar();
 	}
 	prev_month(){
 		this.actual_date.setMonth(this.actual_date.getMonth() - 1);
+		this.update_input();
 		this.update_calendar();
 	}
 	set_year(year){
