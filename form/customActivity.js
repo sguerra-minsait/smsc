@@ -14,18 +14,6 @@
 	connection.on('clickedNext', onClickedNext);
 	connection.on('clickedBack', onClickedBack);
 
-	connection.on('clickedNext', function() {
-		step++;
-		gotoStep(step);
-		connection.trigger('ready');
-	});
-
-	connection.on('clickedBack', function() {
-		step--;
-		gotoStep(step);
-		connection.trigger('ready');
-	});
-
 
 	function onRender() {
 		connection.trigger('ready');
@@ -80,12 +68,14 @@
 
 	function onClickedNext () {
 		step++;
+		gotoStep(step);
 		connection.trigger('nextStep');
 		connection.trigger('ready');
 	}
 
 	function onClickedBack () {
 		step--;
+		gotoStep(step);
 		connection.trigger('prevStep');
 		connection.trigger('ready');
 	}
