@@ -52,7 +52,7 @@
 				connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
 				break;
 			case 4:
-				save():
+				save();
 				break;
 		}
 	};
