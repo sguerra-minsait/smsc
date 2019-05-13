@@ -31,6 +31,7 @@
 		connection.trigger('ready');
 		connection.trigger('requestTokens');
 		connection.trigger('requestEndpoints');
+		connection.trigger('updateButton', { button: 'next', enabled: true});
 	}
 
 	function gotoStep(step) {
@@ -38,18 +39,18 @@
 		switch(step) {
 			case 1:
 				$('#template').show();
-				connection.trigger('updateButton', { button: 'next', text: 'next', enabled:true });
-				connection.trigger('updateButton', { button: 'back', visible: false });
+				//connection.trigger('updateButton', { button: 'next', text: 'next', enabled:true });
+				//connection.trigger('updateButton', { button: 'back', visible: false });
 				break;
 			case 2:
 				$('#delivery').show();
-				connection.trigger('updateButton', { button: 'back', visible: true });
-				connection.trigger('updateButton', { button: 'next', text: 'next', visible: true });
+				//connection.trigger('updateButton', { button: 'back', visible: true });
+				//connection.trigger('updateButton', { button: 'next', text: 'next', visible: true });
 				break;
 			case 3:
 				$('#testing').show();
-				connection.trigger('updateButton', { button: 'back', visible: true });
-				connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
+				//connection.trigger('updateButton', { button: 'back', visible: true });
+				//connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
 				break;
 			case 4:
 				save();
@@ -75,23 +76,19 @@
 		for(var name in inArguments){
 			$('#' + name).val(inArguments[name]);
 		}
-
-       connection.trigger('updateButton', {
-            button: 'next',
-            text: 'done',
-            visible: true
-        });
 	}
 
 	function onClickedNext () {
 		step++;
 		gotoStep(step);
+		connection.trigger('nextStep');
 		connection.trigger('ready');
 	}
 
 	function onClickedBack () {
 		step--;
 		gotoStep(step);
+		connection.trigger('prevStep');
 		connection.trigger('ready');
 	}
 
