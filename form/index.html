@@ -27,6 +27,9 @@
 	#template {
 		display: block;
 	}
+	#short_url_loading, #short_url_message{
+		display: none;
+	}
 </style>
 </head>
 <body>
@@ -37,6 +40,14 @@
 			<textarea id="message" class="slds-textarea" maxlength="160" placeholder="Type your message" rows="5"></textarea>
 		</div>
 	</div>
+	<button class="slds-button slds-button_brand" id="short_url_button">Add short URL</button>
+	<span class="slds-icon_container slds-icon-utility-announcement" title="Short URLS" id="short_url_message">
+		We have detected URLs in your message, Do you want to make them shorter? <span id="shorter_urls_in_message">Yes</span>
+		<svg class="slds-icon slds-icon-text-default" aria-hidden="true" style="width: 1.5rem; height: 1.5rem">
+			<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#apex"></use>
+		</svg>
+	</span>
+	<span id="short_url_loading">Loading...</span>
 	<div class="slds-form-element">
 		<label class="slds-form-element__label" for="footer">Footer</label>
 		<div class="slds-form-element__control">
@@ -180,7 +191,7 @@
 	</div>
 	<button class="slds-button slds-button_brand">Send one test message!</button>
 </div>
-<div id="error_box"></div>
+<div id="error_box" class="slds-text-color_error"></div>
 <script>
 (function(){
 	var year = new Date().getFullYear();
