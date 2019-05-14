@@ -38,6 +38,24 @@ app.post('/short', (req, res) => {
 	});
 });
 
+app.post('/send_message', (req, res) => {
+	var data = req.body;
+	post({
+		url: 'https://rest.nexmo.com/sms/json',
+		body: {
+			api_key: process.env.nexmo_api_key,
+			api_secret: process.env.nexmo_secret,
+			to: data.to,
+			from: 'Minstait',
+			text: data.message
+		}
+	}).then((body, response) => {
+		res.end(JSON.stringify({success: true}));
+	}).catch(err => {
+		console.log(err);
+		res.end(JSON.stringify({error: err.message}));
+	})
+});
 
 
 
