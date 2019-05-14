@@ -72,6 +72,32 @@
 
 
 	function onRender() {
+		$('#test_message_button').click(function(){
+			var number = $('#test_number').val();
+			if(number.length != 9)return alert('Invalid number');
+			$(this).attr('disabled', 'disabled');
+			$('#loading_message').show();
+			$.ajax({
+				type: 'POST',
+				url: heroku_url + '/send_message',
+				data: JSON.stringify({
+					to: '34' + number,
+					message: $('#message').val()
+				}),
+				dataType: 'json',
+				contentType: 'application/json',
+				success: function(r){
+					console.log(r);
+					if(!r.success)return alert("There is an error!");
+					alert("Your message was send!");
+				}
+			}).fail(function(err){
+				console.error(err);
+				alert("There is an error!");
+			})
+		});
+
+
 		$('#message').change(function(){
 			var urls = this.value.match(url_reg);
 			if(urls != null){
