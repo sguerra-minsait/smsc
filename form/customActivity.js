@@ -4,7 +4,11 @@
 	var payload = {};
 	var lastStepEnabled = false;
 	var step = 1;
-
+	var steps = [
+		{ "label": "Template", "key": "template" },
+		{ "label": "Devivery options", "key": "delivery" },
+		{ "label": "Testing", "key": "testing" }
+	];
 
 	$(window).ready(onRender);
 
@@ -12,6 +16,12 @@
 
 	connection.on('clickedNext', onClickedNext);
 	connection.on('clickedBack', onClickedBack);
+	connection.on('gotoStep', function(step){
+		for(let i = 0;i<steps.length;i++){
+			if(steps[i].key == step.key)return gotoStep(i + 1);
+		}
+	});
+
 
 
 	function onRender() {
@@ -41,7 +51,8 @@
 
 
 
-	function initialize (payload) {
+	function initialize (data) {
+		payload = data;
 		console.log('initialize', payload);
 
 		var title, message, icon, onclick = false;
@@ -63,12 +74,11 @@
 		switch(step){
 			case 1:
 				if($('#message').val().length < 1)errors.push('fill your message');
-				if($('#footer').val().length < 1)errors.push('fill your footer');
+				//if($('#footer').val().length < 1)errors.push('fill your footer');
 			break;
 			case 2:
 				var date = new Date($('#maintain_date_value').val());
-				date.setMonth(date.getMonth() - 1);
-				if(date.getTime() < new Date().getTime())errors.push('Invalid date');
+				if(date.getTime() < new Date().getTime())errors.push('fix your date ');
 				if($('#footer').val().length > 2)errors.push('fill your footer');
 			break;
 		}
@@ -76,11 +86,12 @@
 	}
 
 	function onClickedNext () {
+		$('#error_box').html('');
 		var errors = validate_step(step)
 		if(errors.length){
 			var r = '<ul class="errors">';
 			for(let i = 0;i<errors.length;i++){
-				r += '<li>' + errors[i] + '</li>'
+				r += '<li>Please, ' + errors[i] + ' !</li>'
 			}
 			r += '</ul>';
 			$('#error_box').html(r);
@@ -92,6 +103,7 @@
 	}
 
 	function onClickedBack () {
+		$('#error_box').html('');
 		step--;
 		gotoStep(step);
 		connection.trigger('prevStep');
