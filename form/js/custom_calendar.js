@@ -50,7 +50,7 @@ class CustomCalendar{
 			}
 		}else if(this.equal_date(this.actual_date, new Date())){
 			this.divs.hour_select.html('');
-			for(let i = new Date().getHours();i <= 24;i++){
+			for(let i = new Date().getHours() + 1;i <= 24;i++){
 				this.divs.hour_select.append($(`<option value="${i}">${(i <= 12 ? i + ' AM' : (i-12) + ' PM')}</option>`));
 			}
 		}
