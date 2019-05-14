@@ -18,7 +18,10 @@
 	connection.on('clickedBack', onClickedBack);
 	connection.on('gotoStep', function(step){
 		for(let i = 0;i<steps.length;i++){
-			if(steps[i].key == step.key)return gotoStep(i + 1);
+			if(steps[i].key == step.key){
+				step = i + 1;
+				gotoStep(step);
+			}
 		}
 	});
 
