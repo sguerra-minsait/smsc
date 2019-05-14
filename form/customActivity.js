@@ -50,7 +50,7 @@
 
 	function short_urls(input){
 		var input = input || $('#message');
-		$('#short_url_message').hide(500);
+		$('#short_url_message').hide();
 		
 		var urls = $('#message').val().match(url_reg);
 		if(!urls.length)return;
@@ -75,9 +75,9 @@
 		$('#message').change(function(){
 			var urls = this.value.match(url_reg);
 			if(urls != null){
-				$('#short_url_message').show(500);
+				$('#short_url_message').show();
 			}else{
-				$('#short_url_message').hide(500);
+				$('#short_url_message').hide();
 			}
 		});
 
