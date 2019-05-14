@@ -27,27 +27,22 @@
 	#template {
 		display: block;
 	}
-	#short_url_loading, #short_url_message{
-		display: none;
-	}
 </style>
 </head>
 <body>
 <div id="template" class="step">
 	<div class="slds-form-element">
-		<label class="slds-form-element__label" for="message">Message</label>
+		<label class="slds-form-element__label" for="message"><font style="color:red">*</font>Message</label>
 		<div class="slds-form-element__control">
 			<textarea id="message" class="slds-textarea" maxlength="160" placeholder="Type your message" rows="5"></textarea>
 		</div>
 	</div>
-	<button class="slds-button slds-button_brand" id="short_url_button">Add short URL</button>
-	<span class="slds-icon_container slds-icon-utility-announcement" title="Short URLS" id="short_url_message">
-		We have detected URLs in your message, Do you want to make them shorter? <span id="shorter_urls_in_message">Yes</span>
-		<svg class="slds-icon slds-icon-text-default" aria-hidden="true" style="width: 1.5rem; height: 1.5rem">
+	<button class="slds-button slds-button_brand" id="short_url_button">Short URL</button>
+	<span class="slds-icon_container slds-icon-utility-announcement" title="Description of icon when needed">
+		<svg class="slds-icon slds-icon-text-default" aria-hidden="true">
 			<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#apex"></use>
 		</svg>
 	</span>
-	<span id="short_url_loading">Loading...</span>
 	<div class="slds-form-element">
 		<label class="slds-form-element__label" for="footer">Footer</label>
 		<div class="slds-form-element__control">
@@ -134,11 +129,6 @@
 	<div style="display: inline-block;">
 		<div style="position: relative">
 			<select id="maintain_hour" class="select_time_picker">
-				<option>8 PM</option>
-				<option>9 PM</option>
-				<option>10 PM</option>
-				<option>11 PM</option>
-				<option>12 PM</option>
 			</select>
 		<span class="slds-icon_container maintain_hour_icon slds-icon-utility-clock slds-input__icon slds-input__icon_right"><svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true"><use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#clock"></use></svg></span>
 		</div>
@@ -147,28 +137,30 @@
 	<br>
 	<br>
 	<div class="slds-form-element">
-		<label class="slds-form-element__label click_event_label" for="type">Type</label>
+		<label class="slds-form-element__label click_event_label" for="type"><font style="color:red;">*</font>Type</label>
 		<br>
 		<div class="slds-form-element__control">
 			<div class="slds-select_container">
 				<select class="slds-select" id="type">
-					<option value="open_url">Tipo A</option>
-					<option value="open_url">Tipo B</option>
-					<option value="open_url">Tipo C</option>
+					<option value="" selected="selected">Please, select your type</option>
+					<option value="type_a">Tipo A</option>
+					<option value="type_b">Tipo B</option>
+					<option value="type_c">Tipo C</option>
 				</select>
 			</div>
 		</div>
 	</div>
 	<br>
 	<div class="slds-form-element">
-		<label class="slds-form-element__label  click_event_label" for="tern">Receiver</label>
+		<label class="slds-form-element__label  click_event_label" for="tern"><font style="color: red;">*</font>Sender</label>
 		<br>
 		<div class="slds-form-element__control">
 			<div class="slds-select_container">
-				<select class="slds-select" id="tern">
-					<option value="open_url">672123423</option>
-					<option value="open_url">662533463</option>
-					<option value="open_url">672166553</option>
+				<select class="slds-select" id="sender">
+					<option value="" selected="selected">Please, select your sender</option>
+					<option value="672123423">672123423</option>
+					<option value="662533463">662533463</option>
+					<option value="672166553">672166553</option>
 				</select>
 			</div>
 		</div>

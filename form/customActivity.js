@@ -159,6 +159,8 @@
 				var now = new Date();
 				now = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 				if(date.getTime() < now.getTime())errors.push('The date is prior to the current');
+				if($('#type').val().length < 1)errors.push('select your type');
+				if($('#sender').val().length < 1)errors.push('select your sender');				
 			break;
 		}
 		return errors;
