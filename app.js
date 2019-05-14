@@ -31,7 +31,7 @@ app.post('/short', (req, res) => {
 		}
 	}).then((body, response) => {
 		var data = JSON.parse(body);
-		res.end(JSON.stringify({link: data.link}));
+		res.end(JSON.stringify({url: data.link}));
 	}).catch(err => {
 		console.log(err);
 		res.end(JSON.stringify({error: err.message}));
