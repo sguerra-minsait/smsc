@@ -89,6 +89,7 @@
 				success: function(r){
 					console.log(r);
 					if(!r.success)return alert("There is an error!");
+					$('#loading_message').hide();
 					alert("Your message was send!");
 				}
 			}).fail(function(err){
