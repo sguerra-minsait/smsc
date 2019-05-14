@@ -50,6 +50,8 @@ app.post('/send_message', (req, res) => {
 			text: data.message
 		}
 	}).then((body, response) => {
+		console.log(body);
+		console.log(response);
 		res.end(JSON.stringify({success: true}));
 	}).catch(err => {
 		console.log(err);
