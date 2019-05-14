@@ -194,8 +194,9 @@
 
 	function save() {
 		var data = $('#form').serializeArray();
+		payload['arguments'].execute.inArguments = [];
 		for(var i = 0;i<data.length;i++){
-			payload['arguments'].execute.inArguments[0][data[i].name] = data[i];
+			payload['arguments'].execute.inArguments[data[i].name] = data[i];
 		}
 
 		payload['metaData'].isConfigured = true;
