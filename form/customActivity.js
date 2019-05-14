@@ -81,8 +81,10 @@
 			break;
 			case 2:
 				var date = new Date($('#maintain_date_value').val());
-				if(date.getTime() < new Date().getTime())errors.push('fix your date ');
-				if($('#footer').val().length > 2)errors.push('fill your footer');
+				var now = new Dte();
+				if(date.getFullYear() == now.getFullYear()
+					&& date.getMonth() == now.getMonth()
+					&& date.getDate() == now.getDate())errors.push('The date is prior to the current');
 			break;
 		}
 		return errors;
