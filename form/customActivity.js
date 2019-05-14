@@ -82,9 +82,8 @@
 			case 2:
 				var date = new Date($('#maintain_date_value').val());
 				var now = new Date();
-				if(!(date.getFullYear() == now.getFullYear()
-					&& date.getMonth() == now.getMonth()
-					&& date.getDate() == now.getDate()))errors.push('The date is prior to the current');
+				now = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+				if(date.getTime() < now.getTime())errors.push('The date is prior to the current');
 			break;
 		}
 		return errors;
