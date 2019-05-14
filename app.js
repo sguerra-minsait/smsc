@@ -46,8 +46,11 @@ app.post('/send_message', (req, res) => {
 			api_key: process.env.nexmo_api_key,
 			api_secret: process.env.nexmo_secret,
 			to: data.to,
-			from: 'Minstait',
+			from: 'Minsait',
 			text: data.message
+		},
+		headers: {
+			'Content-Type': 'application/json'
 		}
 	}).then((body, response) => {
 		console.log(body);
