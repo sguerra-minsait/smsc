@@ -34,7 +34,7 @@
 			$.ajax({
 				type: 'POST',
 				url: heroku_url + '/short',
-				data: JSON.stringify({json_url: url}),
+				data: JSON.stringify({long_url: url}),
 				dataType: 'json',
 				contentType: 'application/json',
 				success: function(r){
