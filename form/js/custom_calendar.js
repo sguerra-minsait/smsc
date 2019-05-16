@@ -84,7 +84,7 @@ class CustomCalendar{
 			this.create_day({
 				day: i,
 				year: year,
-				month: month,
+				month: month - 1,
 				today: today == i,
 				selected: new Date(year, month - 1, i).getTime() == this.actual_date.getTime()
 			});
@@ -94,7 +94,7 @@ class CustomCalendar{
 			this.create_day({
 				day: i,
 				year: month_next.getFullYear(),
-				month: month_next.getMonth(),
+				month: month_next.getMonth() - 1,
 				disabled: true,
 				selected: new Date(month_next.getFullYear(), month_next.getMonth(), i).getTime() == this.actual_date.getTime()
 			});
