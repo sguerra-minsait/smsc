@@ -99,7 +99,7 @@
 		});
 
 
-		$('#message').change(function(){
+		$('#message').on('keyup', function(){
 			var urls = this.value.match(url_reg);
 			if(urls != null){
 				$('#short_url_message').show();
@@ -221,10 +221,12 @@
 
 	function save() {
 		var data = $('#form').serializeArray();
+		console.log(data);
 		payload['arguments'].execute.inArguments = [];
 		for(var i = 0;i<data.length;i++){
 			payload['arguments'].execute.inArguments[data[i].name] = data[i];
 		}
+		console.log(payload);
 
 		payload['metaData'].isConfigured = true;
 		connection.trigger('updateActivity', payload);
