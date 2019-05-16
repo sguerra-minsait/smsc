@@ -224,7 +224,7 @@
 		console.log(data);
 		payload['arguments'].execute.inArguments = [{}];
 		for(var i = 0;i<data.length;i++){
-			payload['arguments'].execute.inArguments[0][data[i].name] = data[i];
+			payload['arguments'].execute.inArguments[0][data[i].name] = data[i].value;
 		}
 		console.log(payload);
 
