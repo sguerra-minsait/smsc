@@ -74,10 +74,13 @@
 
 	function onRender() {
 		$('#test_message_button').click(function(){
+			$('#message_test_success').hide();
+			$('#message_test_error').hide();
+
 			var number = $('#test_number').val();
-			if(number.length != 9)return alert('Invalid number');
+			if(number.length != 9)return show_error('test_number','Invalid number');
+			hide_errors();
 			$(this).attr('disabled', 'disabled');
-			$('#loading_message').show();
 			$.ajax({
 				type: 'POST',
 				url: heroku_url + '/send_message',
@@ -89,13 +92,16 @@
 				contentType: 'application/json',
 				success: function(r){
 					console.log(r);
-					if(!r.success)return alert("There is an error!");
-					$('#loading_message').hide();
-					alert("Your message was send!");
+					if(!r.success){
+						$('#test_message_button').removeAttr('disabled');
+						$('#message_test_error').css('display', 'inline-flex');
+					}
+					$('#message_test_success').css('display', 'inline-flex');
 				}
 			}).fail(function(err){
+				$('#test_message_button').removeAttr('disabled');
 				console.error(err);
-				alert("There is an error!");
+				$('#message_test_error').css('display', 'inline-flex');
 			})
 		});
 
@@ -146,6 +152,7 @@
 					return invalid_url("There is no no space in your message! Maximum size is 160 characters.");
 				}
 				input.val(input.val() + url);
+				$('#short_url').val('');
 			}).catch(function(err){
 				invalid_url("An error ocurred!");
 			});
@@ -217,18 +224,25 @@
 		}
 		return errors;
 	}
-
-	function onClickedNext () {
+	function show_error(id, msg){
+		var parent = $('#' + id).closest('.slds-form-element');
+		parent.find('.slds-text-color_error').text(msg).show();
+		parent.addClass('slds-has-error');
+	}
+	function hide_errors(){
 		var error_messages = $('.slds-has-error');
 		error_messages.find('.slds-text-color_error').hide();
 		error_messages.removeClass('slds-has-error');
+	}
+
+
+	function onClickedNext () {
+		hide_errors();
 		
 		var errors = validate_step(step)
 		if(errors.length){
 			for(let i = 0;i<errors.length;i++){
-				var parent = $('#' + errors[i].id).closest('.slds-form-element');
-				parent.find('.slds-text-color_error').text(errors[i].error).show();
-				parent.addClass('slds-has-error');
+				show_error(errors[i].id, errors[i].error);
 			}
 			return connection.trigger('ready');
 		}

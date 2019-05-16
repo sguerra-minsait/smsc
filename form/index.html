@@ -27,13 +27,16 @@
 	#template {
 		display: block;
 	}
-	#short_url_loading, #short_url_message, #loading_message{
+	#short_url_loading, #short_url_message, #loading_message, #message_test_error, #message_test_success{
 		display: none;
 	}
 	#short_url_button{
 		width: 200px;
 		height: 40px;
 		margin-right: 20px;
+	}
+	#message_test_error, #message_test_success{
+		margin-top: 20px;
 	}
 </style>
 </head>
@@ -50,7 +53,7 @@
 	<div style="display: flex;margin-top: 10px;">
 		<button class="slds-button slds-button_brand" id="short_url_button">Add short URL</button>
 		<div class="slds-form-element" style="width: 100%">
- 			<div class="slds-form-element__control">
+			<div class="slds-form-element__control">
 				<input type="text" id="short_url" placeholder="https://www.large_url.com" class="slds-input"/>
 			</div>
 			<div id="invalid_url" class="slds-text-color_error"></div>
@@ -170,9 +173,10 @@
 			<div class="slds-select_container">
 				<select class="slds-select" id="type" name="type">
 					<option value="" selected="selected">Please, select your type</option>
-					<option value="type_a">Tipo A</option>
-					<option value="type_b">Tipo B</option>
-					<option value="type_c">Tipo C</option>
+					<option value="commercial">Commercial</option>
+					<option value="informative">Informative</option>
+					<option value="normative">Normative</option>
+					<option value="transactional">Transactional</option>
 				</select>
 			</div>
 		</div>
@@ -195,7 +199,7 @@
 </div>
 
 <div id="testing" class="step">
-	<div class="slds-form-element" style="display: inline-block;">
+	<div class="slds-form-element" style="display: inline-block;float: left">
 		<label class="slds-form-element__label " for="test_number">
 			Number
 		</label>
@@ -208,9 +212,43 @@
 			</svg>
 			<div><input type="text" id="test_number" maxlength="20" class="slds-input"></div>
 		</div>
+		<div class="slds-text-color_error"></div>
 	</div>
-	<button class="slds-button slds-button_brand" id="test_message_button">Send one test message!</button>
-	<div id="loading_message">Loading...</div>
+	<button class="slds-button slds-button_brand" id="test_message_button" style="float: left;margin-top: 24px; margin-left: 20px;">Send one test message!</button>
+	<div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_success" role="alert" id="message_test_success">
+		<span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Success">
+			<svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+				<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#success"></use>
+			</svg>
+		</span>
+		<h2>Your message was successfully sent !</h2>
+		<div class="slds-notify__close">
+			<button class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" title="Close" onclick="$('#message_test_success').hide();">
+				<svg class="slds-button__icon" aria-hidden="true">
+				<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+				</svg>
+				<span class="slds-assistive-text" >Close</span>
+			</button>
+		</div>
+	</div>
+
+	<div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert" id="message_test_error">
+		<span class="slds-assistive-text">error</span>
+		<span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed">
+		<svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+			<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#error"></use>
+		</svg>
+		</span>
+		<h2>There was an error ! Please, try again in a few minutes.</h2>
+		<div class="slds-notify__close">
+			<button class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" title="Close" onclick="$('#message_test_error').hide();">
+			<svg class="slds-button__icon" aria-hidden="true">
+			<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+			</svg>
+			<span class="slds-assistive-text">Close</span>
+			</button>
+		</div>
+	</div>
 </div>
 <!--<div id="error_box" class="slds-text-color_error"></div>-->
 </form>
