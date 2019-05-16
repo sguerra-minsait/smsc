@@ -38,7 +38,7 @@
 	<div class="slds-form-element">
 		<label class="slds-form-element__label" for="message"><font style="color:red">*</font>Message</label>
 		<div class="slds-form-element__control">
-			<textarea id="message" class="slds-textarea" maxlength="160" placeholder="Type your message" rows="5"></textarea>
+			<textarea id="message" name="message" class="slds-textarea" maxlength="160" placeholder="Type your message" rows="5"></textarea>
 		</div>
 	</div>
 	<button class="slds-button slds-button_brand" id="short_url_button">Add short URL</button>
@@ -55,7 +55,7 @@
 	<div class="slds-form-element">
 		<label class="slds-form-element__label" for="footer">Footer</label>
 		<div class="slds-form-element__control">
-			<input type="text" id="footer" placeholder="Type your footer" class="slds-input" />
+			<input type="text" id="footer" name="footer" placeholder="Type your footer" class="slds-input" />
 		</div>
 	</div>
 </div>
@@ -66,7 +66,7 @@
 	  <div class="slds-form-element slds-dropdown-trigger slds-dropdown-trigger_click">
 		<label class="slds-form-element__label" for="date-input-id">Maintain until</label>
 		<div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right custom_calendar_input_container">
-		  <input type="text" placeholder=" " class="slds-input" value="" id="maintain_date_value" />
+		  <input type="text" placeholder=" " class="slds-input" value="" id="maintain_date_value" name="maintain_date_value" />
 		  <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Select a date">
 			<svg class="slds-button__icon" aria-hidden="true">
 			  <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#event"></use>
@@ -150,7 +150,7 @@
 		<br>
 		<div class="slds-form-element__control">
 			<div class="slds-select_container">
-				<select class="slds-select" id="type">
+				<select class="slds-select" id="type" name="type">
 					<option value="" selected="selected">Please, select your type</option>
 					<option value="type_a">Tipo A</option>
 					<option value="type_b">Tipo B</option>
@@ -165,7 +165,7 @@
 		<br>
 		<div class="slds-form-element__control">
 			<div class="slds-select_container">
-				<select class="slds-select" id="sender">
+				<select class="slds-select" id="sender" name="sender">
 					<option value="" selected="selected">Please, select your sender</option>
 					<option value="672123423">672123423</option>
 					<option value="662533463">662533463</option>
@@ -175,7 +175,7 @@
 		</div>
 	</div>
 </div>
-</form>
+
 <div id="testing" class="step">
 	<div class="slds-form-element" style="display: inline-block;">
 		<label class="slds-form-element__label " for="test_number">
@@ -195,6 +195,7 @@
 	<div id="loading_message">Loading...</div>
 </div>
 <div id="error_box" class="slds-text-color_error"></div>
+</form>
 <script>
 (function(){
 	var year = new Date().getFullYear();
