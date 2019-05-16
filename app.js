@@ -26,11 +26,13 @@ app.post('/short', (req, res) => {
 		url: 'https://api-ssl.bitly.com/v4/shorten',
 		body: {long_url: long_url},
 		headers: {
-			'Authorization': 'Bearer f2fe6fde72541aee06d8c4093487c941b24fa87b',
+			'Authorization': 'Bearer ' + process.env.bearer_bityl,
 			'Content-Type': 'application/json'
 		}
 	}).then((body, response) => {
 		var data = JSON.parse(body);
+		console.log(data);
+		if(data.link.indexOf('http'))
 		res.end(JSON.stringify({url: data.link}));
 	}).catch(err => {
 		console.log(err);
@@ -53,6 +55,18 @@ app.post('/send_message', (req, res) => {
 			'Content-Type': 'application/json'
 		}
 	}).then((body, response) => {
+/*{
+    "message-count": "1",
+    "messages": [{
+        "to": "34672054149",
+        "message-id": "140000002AE2CFB3",
+        "status": "0",
+        "remaining-balance": "1.03220000",
+        "message-price": "0.06890000",
+        "network": "21401"
+    }]
+}*/
+
 		console.log(body);
 		console.log(response);
 		res.end(JSON.stringify({success: true}));
