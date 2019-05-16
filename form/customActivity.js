@@ -10,7 +10,8 @@
 		{ "label": "Testing", "key": "testing" }
 	];
 	var heroku_url = 'https://pushintegration.herokuapp.com';
-	var url_reg = /(https?\:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
+	//var url_reg = /(https?\:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
+	var url_reg = /((https?\:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
 
 
 
@@ -98,7 +99,16 @@
 			})
 		});
 
+		$('#short_url').on('keyup', function(){
+			if(this.value.match(url_reg))invalid_url(0, true);
+			
+		});
+		$('#short_url').on('blur', function(){
+			if(this.value.match(url_reg) && !this.value.match(/https?:\/\//))
+				this.value = 'https://' + this.value;
+		});
 
+/*
 		$('#message').on('keyup', function(){
 			var urls = this.value.match(url_reg);
 			if(urls != null){
@@ -111,23 +121,34 @@
 		$('#shorter_urls_in_message').click(function(){
 			short_urls();
 		});
+*/
+		function invalid_url(msg, hide){
+			var div = $('#invalid_url');
+			if(msg)div.text(msg);
+			if(hide){
+				div.parent().parent().removeClass('slds-has-error');
+				div.hide();
+			}else{
+				div.parent().parent().addClass('slds-has-error');
+				div.show();
+			}
+		}
 
 
 		$('#short_url_button').click(function(){
-			var url;
-			do{
-				url = prompt("Type your URL: ");
-				if(!url)return;
-			}while(!url.match(url_reg));
+			var url = $('#short_url').val();
+			if(!url.match(url_reg)){
+				return invalid_url("Enlace invalido");
+			}
 			short_url(url).then(function(url){
 				var input = $('#message');
 				if(input.val().length + url.length > input.attr('maxlength')){
-					return alert("There is no no space in your message! Maximum size is 160 characters.");
+					return invalid_url("There is no no space in your message! Maximum size is 160 characters.");
 				}
 				input.val(input.val() + url);
 			}).catch(function(err){
-				alert("An error ocurred!");
-			})
+				invalid_url("An error ocurred!");
+			});
 		});
 
 		connection.trigger('ready');
@@ -178,31 +199,37 @@
 		var errors = [];
 		switch(step){
 			case 1:
-				if($('#message').val().length < 1)errors.push('fill your message');
+				if($('#message').val().length < 1)
+					errors.push({id: 'message', error: 'Please, fill your message!'});
 				//if($('#footer').val().length < 1)errors.push('fill your footer');
 			break;
 			case 2:
 				var date = new Date($('#maintain_date_value').val());
 				var now = new Date();
 				now = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-				if(date.getTime() < now.getTime())errors.push('The date is prior to the current');
-				if($('#type').val().length < 1)errors.push('select your type');
-				if($('#sender').val().length < 1)errors.push('select your sender');				
+				if(date.getTime() < now.getTime())
+					errors.push({id: 'maintain_date_value', error: 'The date is prior to the current'});
+				if($('#type').val().length < 1)
+					errors.push({id: 'type', error: 'Please, select your type!'});
+				if($('#sender').val().length < 1)
+					errors.push({id: 'sender', error: 'Please, select your sender!'});				
 			break;
 		}
 		return errors;
 	}
 
 	function onClickedNext () {
-		$('#error_box').html('');
+		var error_messages = $('.slds-has-error');
+		error_messages.find('.slds-text-color_error').hide();
+		error_messages.removeClass('slds-has-error');
+		
 		var errors = validate_step(step)
 		if(errors.length){
-			var r = '<ul class="errors">';
 			for(let i = 0;i<errors.length;i++){
-				r += '<li>Please, ' + errors[i] + ' !</li>'
+				var parent = $('#' + errors[i].id).closest('.slds-form-element');
+				parent.find('.slds-text-color_error').text(errors[i].error).show();
+				parent.addClass('slds-has-error');
 			}
-			r += '</ul>';
-			$('#error_box').html(r);
 			return connection.trigger('ready');
 		}
 		step++;
