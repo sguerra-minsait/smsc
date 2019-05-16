@@ -30,27 +30,44 @@
 	#short_url_loading, #short_url_message, #loading_message{
 		display: none;
 	}
+	#short_url_button{
+		width: 200px;
+		height: 40px;
+		margin-right: 20px;
+	}
 </style>
 </head>
 <body>
 <form id="form" action="javascript:void(0)">
 <div id="template" class="step">
 	<div class="slds-form-element">
-		<label class="slds-form-element__label" for="message"><font style="color:red">*</font>Message</label>
+		<label class="slds-form-element__label" for="message">Message(<font style="color:red">*</font>)</label>
 		<div class="slds-form-element__control">
 			<textarea id="message" name="message" class="slds-textarea" maxlength="160" placeholder="Type your message" rows="5"></textarea>
 		</div>
+		<div class="slds-text-color_error"></div>
 	</div>
-	<button class="slds-button slds-button_brand" id="short_url_button">Add short URL</button>
+	<div style="display: flex;margin-top: 10px;">
+		<button class="slds-button slds-button_brand" id="short_url_button">Add short URL</button>
+		<div class="slds-form-element" style="width: 100%">
+ 			<div class="slds-form-element__control">
+				<input type="text" id="short_url" placeholder="https://www.large_url.com" class="slds-input"/>
+			</div>
+			<div id="invalid_url" class="slds-text-color_error"></div>
+		</div>
+	</div>
+
+		<!--
+
 	<span class="slds-icon_container slds-icon-utility-announcement" title="Short URLS" id="short_url_message">
 		We have detected URLs in your message, Do you want to make them shorter? 
 		<button class="slds-button slds-button_brand" id="shorter_urls_in_message">Yes</button>
-		<!--
 		<svg class="slds-icon slds-icon-text-default" aria-hidden="true" style="width: 1.5rem; height: 1.5rem">
 			<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#apex"></use>
 		</svg>
-		-->
 	</span>
+		-->
+
 	<span id="short_url_loading">Loading...</span>
 	<div class="slds-form-element">
 		<label class="slds-form-element__label" for="footer">Footer</label>
@@ -64,8 +81,8 @@
 <div id="delivery" class="step">
 	<div id="maintain_date" style="display: inline-block;">
 	  <div class="slds-form-element slds-dropdown-trigger slds-dropdown-trigger_click">
-		<label class="slds-form-element__label" for="date-input-id">Maintain until</label>
-		<div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right custom_calendar_input_container">
+		<label class="slds-form-element__label" for="date-input-id" style="display: block;">Maintain until</label>
+		<div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right custom_calendar_input_container" style="display: inline-block;">
 		  <input type="text" placeholder=" " class="slds-input" value="" id="maintain_date_value" name="maintain_date_value" />
 		  <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Select a date">
 			<svg class="slds-button__icon" aria-hidden="true">
@@ -134,19 +151,20 @@
 		  </table>
 		  <button class="slds-button slds-align_absolute-center slds-text-link custom_go_today">Today</button>
 		</div>
-	  </div>
-	<div style="display: inline-block;">
-		<div style="position: relative">
-			<select id="maintain_hour" class="select_time_picker">
-			</select>
-		<span class="slds-icon_container maintain_hour_icon slds-icon-utility-clock slds-input__icon slds-input__icon_right"><svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true"><use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#clock"></use></svg></span>
+		<div style="display: inline-block;">
+			<div style="position: relative">
+				<select id="maintain_hour" class="select_time_picker"></select>
+				<span class="slds-icon_container maintain_hour_icon slds-icon-utility-clock slds-input__icon slds-input__icon_right"><svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true"><use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#clock"></use></svg></span>
+			</div>
 		</div>
-	</div>
+		<div class="slds-text-color_error"></div>
+	  </div>
+
 	</div>
 	<br>
 	<br>
 	<div class="slds-form-element">
-		<label class="slds-form-element__label click_event_label" for="type"><font style="color:red;">*</font>Type</label>
+		<label class="slds-form-element__label click_event_label" for="type">Type (<font style="color:red;">*</font>)</label>
 		<br>
 		<div class="slds-form-element__control">
 			<div class="slds-select_container">
@@ -161,7 +179,7 @@
 	</div>
 	<br>
 	<div class="slds-form-element">
-		<label class="slds-form-element__label  click_event_label" for="tern"><font style="color: red;">*</font>Sender</label>
+		<label class="slds-form-element__label  click_event_label" for="tern">Sender (<font style="color: red;">*</font>)</label>
 		<br>
 		<div class="slds-form-element__control">
 			<div class="slds-select_container">
@@ -194,7 +212,7 @@
 	<button class="slds-button slds-button_brand" id="test_message_button">Send one test message!</button>
 	<div id="loading_message">Loading...</div>
 </div>
-<div id="error_box" class="slds-text-color_error"></div>
+<!--<div id="error_box" class="slds-text-color_error"></div>-->
 </form>
 <script>
 (function(){
