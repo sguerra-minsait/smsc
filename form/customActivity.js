@@ -168,10 +168,10 @@
 			payload['arguments'].execute.inArguments.length > 0
 		);
 
-		var inArguments = hasInArguments ? payload['arguments'].execute.inArguments : {};
+		var inArguments = hasInArguments ? payload['arguments'].execute.inArguments[0] : {};
 
 		for(var name in inArguments){
-			$('#' + name).val(inArguments[name]);
+			$('[name="' + name + '"]').val(inArguments[name]);
 		}
 	}
 	function validate_step(step){
@@ -222,9 +222,9 @@
 	function save() {
 		var data = $('#form').serializeArray();
 		console.log(data);
-		payload['arguments'].execute.inArguments = [];
+		payload['arguments'].execute.inArguments = [{}];
 		for(var i = 0;i<data.length;i++){
-			payload['arguments'].execute.inArguments[data[i].name] = data[i];
+			payload['arguments'].execute.inArguments[0][data[i].name] = data[i];
 		}
 		console.log(payload);
 
