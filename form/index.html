@@ -11,6 +11,7 @@
 <script type="text/javascript" src="js/custom_calendar.js"></script>
 <link rel="stylesheet" type="text/css" href="css/salesforce-lightning-design-system.min.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/samsung_fonts.css">
 
 <style type="text/css">
 	html{
@@ -37,6 +38,53 @@
 	}
 	#message_test_error, #message_test_success{
 		margin-top: 20px;
+	}
+	#phone_preview_container{
+		position: relative;
+		width: 278px;
+		height: 400px;
+		float: left;
+		font-family: "Salesforce Sans",Arial,sans-serif;
+	}
+	#phone_preview_container img{
+		position: absolute;
+	}
+	#message_preview{
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		background: transparent;
+		font-size: 13px;
+		color: black;
+		border: none;
+		outline: none;
+		resize: none;
+		position: absolute;
+		top: 74px;
+		left: 65px;
+		padding: 4px;
+		width: 182px;
+		height: 62px;
+		background: #ececec;
+		font-family: "Samsung Sans Light";
+	}
+	#sender_preview{
+		position: absolute;
+		width: 50px;
+		height: 20px;
+		top: 41px;
+		left: 52px;
+		letter-spacing: 1px;
+		color: #666;
+		font-weight: bold;
+	}
+	#time_preview{
+		position: absolute;
+		left: 37px;
+		top: 20px;
+		font-size: 10px;
+		color: #666;
+		cursor: default;
 	}
 </style>
 </head>
@@ -199,55 +247,63 @@
 </div>
 
 <div id="testing" class="step">
-	<div class="slds-form-element" style="display: inline-block;float: left">
-		<label class="slds-form-element__label " for="test_number">
-			Number
-		</label>
+	<div style="height: 90px;">
+		<div class="slds-form-element" style="display: inline-block;float: left">
+			<label class="slds-form-element__label " for="test_number">
+				Number
+			</label>
 
-		<div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right slds-border_bottom">
-			<svg class="slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default scm-anchor-right" aria-hidden="true">
-				<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="scm-anchor-right">
-					<path d="M4.4 15.4l4.1 4.1c.2.2.5.2.6 0L19.4 9.2c.2-.2.2-.4 0-.6l-4.1-4.1c-.2-.2-.4-.2-.6 0L4.4 14.8c-.2.2-.2.5 0 .6zM16.7 2.6c-.2.2-.2.5 0 .7l4 4c.2.2.5.2.7 0l1.1-1.1c.8-.7.8-1.8 0-2.6l-2.1-2.1c-.8-.8-1.9-.8-2.7 0l-1 1.1zM1 22.2c-.1.5.3.9.8.8l5-1.2c.2 0 .3-.1.4-.2l.1-.1c.1-.1.1-.4-.1-.6l-4.1-4.1c-.2-.2-.5-.2-.6-.1l-.1.1c-.1.1-.2.3-.2.4l-1.2 5z"></path>
+			<div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right slds-border_bottom">
+				<svg class="slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default scm-anchor-right" aria-hidden="true">
+					<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="scm-anchor-right">
+						<path d="M4.4 15.4l4.1 4.1c.2.2.5.2.6 0L19.4 9.2c.2-.2.2-.4 0-.6l-4.1-4.1c-.2-.2-.4-.2-.6 0L4.4 14.8c-.2.2-.2.5 0 .6zM16.7 2.6c-.2.2-.2.5 0 .7l4 4c.2.2.5.2.7 0l1.1-1.1c.8-.7.8-1.8 0-2.6l-2.1-2.1c-.8-.8-1.9-.8-2.7 0l-1 1.1zM1 22.2c-.1.5.3.9.8.8l5-1.2c.2 0 .3-.1.4-.2l.1-.1c.1-.1.1-.4-.1-.6l-4.1-4.1c-.2-.2-.5-.2-.6-.1l-.1.1c-.1.1-.2.3-.2.4l-1.2 5z"></path>
+					</svg>
 				</svg>
-			</svg>
-			<div><input type="text" id="test_number" maxlength="20" class="slds-input"></div>
+				<div><input type="text" id="test_number" maxlength="20" class="slds-input"></div>
+			</div>
+			<div class="slds-text-color_error"></div>
 		</div>
-		<div class="slds-text-color_error"></div>
-	</div>
-	<button class="slds-button slds-button_brand" id="test_message_button" style="float: left;margin-top: 24px; margin-left: 20px;">Send one test message!</button>
-	<div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_success" role="alert" id="message_test_success">
-		<span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Success">
+		<button class="slds-button slds-button_brand" id="test_message_button" style="float: left;margin-top: 24px; margin-left: 20px;">Send one test message!</button>
+		<div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_success" role="alert" id="message_test_success">
+			<span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Success">
+				<svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+					<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#success"></use>
+				</svg>
+			</span>
+			<h2>Your message was successfully sent !</h2>
+			<div class="slds-notify__close">
+				<button class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" title="Close" onclick="$('#message_test_success').hide();">
+					<svg class="slds-button__icon" aria-hidden="true">
+					<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+					</svg>
+					<span class="slds-assistive-text" >Close</span>
+				</button>
+			</div>
+		</div>
+
+		<div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert" id="message_test_error">
+			<span class="slds-assistive-text">error</span>
+			<span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed">
 			<svg class="slds-icon slds-icon_x-small" aria-hidden="true">
-				<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#success"></use>
+				<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#error"></use>
 			</svg>
-		</span>
-		<h2>Your message was successfully sent !</h2>
-		<div class="slds-notify__close">
-			<button class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" title="Close" onclick="$('#message_test_success').hide();">
+			</span>
+			<h2>There was an error ! Please, try again in a few minutes.</h2>
+			<div class="slds-notify__close">
+				<button class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" title="Close" onclick="$('#message_test_error').hide();">
 				<svg class="slds-button__icon" aria-hidden="true">
 				<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
 				</svg>
-				<span class="slds-assistive-text" >Close</span>
-			</button>
+				<span class="slds-assistive-text">Close</span>
+				</button>
+			</div>
 		</div>
 	</div>
-
-	<div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert" id="message_test_error">
-		<span class="slds-assistive-text">error</span>
-		<span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed">
-		<svg class="slds-icon slds-icon_x-small" aria-hidden="true">
-			<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#error"></use>
-		</svg>
-		</span>
-		<h2>There was an error ! Please, try again in a few minutes.</h2>
-		<div class="slds-notify__close">
-			<button class="slds-button slds-button_icon slds-button_icon-small slds-button_icon-inverse" title="Close" onclick="$('#message_test_error').hide();">
-			<svg class="slds-button__icon" aria-hidden="true">
-			<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
-			</svg>
-			<span class="slds-assistive-text">Close</span>
-			</button>
-		</div>
+	<div id="phone_preview_container">
+		<img src="images/android_sms_preview_2.png">
+		<textarea id="message_preview" maxlength="160" spellcheck="false"></textarea>
+		<div id="sender_preview"></div>
+		<div id="time_preview"></div>
 	</div>
 </div>
 <!--<div id="error_box" class="slds-text-color_error"></div>-->
@@ -258,6 +314,30 @@
 	var c = new CustomCalendar($('#maintain_date'), {
 		years: {from: year, to: year + 50}
 	});
+
+	$('#message').on('input',function(){
+		$('#message_preview').val(this.value);
+	});
+	$('#sender').change(function(){
+		$('#sender_preview').text(this.value);
+	});
+
+	$('#message_preview').each(function () {
+		this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+		}).on('input', function () {
+		$('#message').val(this.value);
+		this.style.height = 'auto';
+		if(this.scrollHeight > 310)return this.style.height = '310px';
+		if(this.scrollHeight < 50)return this.style.height = '50px';
+		this.style.height = (this.scrollHeight) + 'px';
+	});
+
+	setInterval(change_time_preview, 60000);
+	function change_time_preview(){
+		var d = new Date();
+		$('#time_preview').text(d.getHours() + ':' + d.getMinutes());
+	}
+	change_time_preview();
 })();
 </script>
 </body>
