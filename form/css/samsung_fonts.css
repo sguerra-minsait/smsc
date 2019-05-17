@@ -1,0 +1,38 @@
+@font-face {
+font-family: 'Samsung Sans Regular';
+font-style: normal;
+font-weight: normal;
+src: local('Samsung Sans Regular'), url('assets/fonts/SamsungSans-Regular.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Samsung Sans Thin';
+font-style: normal;
+font-weight: normal;
+src: local('Samsung Sans Thin'), url('assets/fonts/SamsungSans-Thin.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Samsung Sans Light';
+font-style: normal;
+font-weight: normal;
+src: local('Samsung Sans Light'), url('assets/fonts/SamsungSans-Light.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Samsung Sans Medium';
+font-style: normal;
+font-weight: normal;
+src: local('Samsung Sans Medium'), url('assets/fonts/SamsungSans-Medium.woff') format('woff');
+}
+
+
+@font-face {
+font-family: 'Samsung Sans Bold';
+font-style: normal;
+font-weight: normal;
+src: local('Samsung Sans Bold'), url('assets/fonts/SamsungSans-Bold.woff') format('woff');
+}
