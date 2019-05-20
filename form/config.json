@@ -8,8 +8,8 @@
 		"type": "REST",
 		"lang": {
 			 "en-US": {
-					 "name": "SMSC Push Integration",
-					 "description": "Esqueleto de integración con SMSC"
+					 "name": "Custom Activity SMS Wizard",
+					 "description": "Esqueleto de integración con un servicio SMS"
 			 }
 		},
 		"arguments": {
@@ -51,7 +51,7 @@
 		],
 		"userInterfaces": {
 			 "configModal": {
-					 "height": 600,
+					 "height": 400,
 					 "width": 700,
 					 "fullscreen": false
 			 }
