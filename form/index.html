@@ -42,7 +42,8 @@
 	#phone_preview_container{
 		position: relative;
 		width: 278px;
-		height: 400px;
+		height: 490px;
+		overflow: hidden;
 		float: left;
 		font-family: "Salesforce Sans",Arial,sans-serif;
 	}
@@ -54,7 +55,7 @@
 		-moz-appearance: none;
 		appearance: none;
 		background: transparent;
-		font-size: 13px;
+		font-size: 12px;
 		color: black;
 		border: none;
 		outline: none;
@@ -66,7 +67,7 @@
 		width: 182px;
 		height: 62px;
 		background: #ececec;
-		font-family: "Samsung Sans Light";
+		font-family: Arial;
 	}
 	#sender_preview{
 		position: absolute;
@@ -95,6 +96,7 @@
 		<label class="slds-form-element__label" for="message">Message(<font style="color:red">*</font>)</label>
 		<div class="slds-form-element__control">
 			<textarea id="message" name="message" class="slds-textarea" maxlength="160" placeholder="Type your message" rows="5"></textarea>
+			<font id="message_rest_space"></font>
 		</div>
 		<div class="slds-text-color_error"></div>
 	</div>
@@ -315,22 +317,34 @@
 		years: {from: year, to: year + 50}
 	});
 
-	$('#message').on('input',function(){
-		$('#message_preview').val(this.value);
+	function set_height_preview(){
+		var p = document.querySelector('#message_preview');
+		$('#message').val(p.value);
+		p.style.height = 'auto';
+		if(p.scrollHeight > 310)return p.style.height = '310px';
+		if(p.scrollHeight < 50)return p.style.height = '50px';
+		p.style.height = (p.scrollHeight) + 'px';
+	}
+
+
+
+	var message_preview = document.querySelector('#message_preview');
+	message_preview.setAttribute('style', 'height:' + (message_preview.scrollHeight) + 'px;overflow-y:hidden;');
+	$(message_preview).on('input change keyup cut', function () {
+		set_height_preview();
+	});
+
+	$('#message').on('change paste keyup cut',function(){
+		var v = this.value;
+		$('#message_preview').val(v);
+		$('#message_rest_space').text((160 - v.length) + " caracteres restantes");
+		set_height_preview();
 	});
 	$('#sender').change(function(){
 		$('#sender_preview').text(this.value);
 	});
 
-	$('#message_preview').each(function () {
-		this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
-		}).on('input', function () {
-		$('#message').val(this.value);
-		this.style.height = 'auto';
-		if(this.scrollHeight > 310)return this.style.height = '310px';
-		if(this.scrollHeight < 50)return this.style.height = '50px';
-		this.style.height = (this.scrollHeight) + 'px';
-	});
+
 
 	setInterval(change_time_preview, 60000);
 	function change_time_preview(){
