@@ -87,6 +87,15 @@
 		color: #666;
 		cursor: default;
 	}
+	.select_time_picker[disabled]:active{
+		background-color: #ecebea;
+		border-color: #c9c7c5;
+		cursor: not-allowed;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
 </style>
 </head>
 <body>
@@ -132,9 +141,19 @@
 
 
 <div id="delivery" class="step">
+<div class="slds-form-element">
+	<div class="slds-form-element__control">
+		<div class="slds-checkbox">
+			<input type="checkbox" name="options" id="expiration_date_checkbox" value="true" checked="checked" />
+			<label class="slds-checkbox__label" for="expiration_date_checkbox">
+				<span class="slds-checkbox_faux"></span>
+				<span class="slds-form-element__label">Expiration date</span>
+		  </label>
+		</div>
+	</div>
+</div>
 	<div id="maintain_date" style="display: inline-block;">
 	  <div class="slds-form-element slds-dropdown-trigger slds-dropdown-trigger_click">
-		<label class="slds-form-element__label" for="date-input-id" style="display: block;">Maintain until</label>
 		<div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right custom_calendar_input_container" style="display: inline-block;">
 		  <input type="text" placeholder=" " class="slds-input" value="" id="maintain_date_value" name="maintain_date_value" />
 		  <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Select a date">
@@ -325,6 +344,14 @@
 		if(p.scrollHeight < 50)return p.style.height = '50px';
 		p.style.height = (p.scrollHeight) + 'px';
 	}
+
+	$('#expiration_date_checkbox').change(function(){
+		if(this.checked){
+			$('#maintain_date_value, #maintain_hour').attr('disabled', 'disabled');
+		}else{
+			$('#maintain_date_value, #maintain_hour').removeAttr('disabled');
+		}
+	});
 
 
 
