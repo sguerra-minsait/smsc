@@ -201,6 +201,9 @@
 		for(var name in inArguments){
 			$('[name="' + name + '"]').val(inArguments[name]);
 		}
+		if(inArguments['message']){
+			$('#message').trigger('keyup');
+		}
 	}
 	function validate_step(step){
 		var errors = [];
