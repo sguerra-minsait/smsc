@@ -87,7 +87,7 @@
 		color: #666;
 		cursor: default;
 	}
-	.select_time_picker[disabled]:active{
+	.select_time_picker[disabled]{
 		background-color: #ecebea;
 		border-color: #c9c7c5;
 		cursor: not-allowed;
@@ -346,7 +346,7 @@
 	}
 
 	$('#expiration_date_checkbox').change(function(){
-		if(this.checked){
+		if(!this.checked){
 			$('#maintain_date_value, #maintain_hour').attr('disabled', 'disabled');
 		}else{
 			$('#maintain_date_value, #maintain_hour').removeAttr('disabled');
