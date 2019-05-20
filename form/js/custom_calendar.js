@@ -71,32 +71,20 @@ class CustomCalendar{
 
 
 		for(let i = month_before.getDate() - date.getDay() + 2; i <= month_before.getDate(); i++){
-			this.create_day({
-				day: i,
-				year: month_before.getFullYear(),
-				month: month_before.getMonth(),
-				disabled: true,
-				selected: new Date(month_before.getFullYear(), month_before.getMonth(), i).getTime() == this.actual_date.getTime()
+			this.create_day(i, {disabled: true, selected: 
+				new Date(month_before.getFullYear(), month_before.getMonth(), i).getTime() == this.actual_date.getTime()
 			});
 		}
 
 		for(let i = 1; i <= new Date(year, month, 0).getDate();i++){
-			this.create_day({
-				day: i,
-				year: year,
-				month: month - 1,
-				today: today == i,
-				selected: new Date(year, month - 1, i).getTime() == this.actual_date.getTime()
+			this.create_day(i, {today: today == i, selected:
+				new Date(year, month - 1, i).getTime() == this.actual_date.getTime()
 			});
 		}
 
 		for(let i = 1;i <= this.total_days - this.n_days;i++){
-			this.create_day({
-				day: i,
-				year: month_next.getFullYear(),
-				month: month_next.getMonth() - 1,
-				disabled: true,
-				selected: new Date(month_next.getFullYear(), month_next.getMonth(), i).getTime() == this.actual_date.getTime()
+			this.create_day(i, {disabled: true, selected:
+				new Date(month_next.getFullYear(), month_next.getMonth(), i).getTime() == this.actual_date.getTime()
 			});
 		}
 
@@ -106,20 +94,15 @@ class CustomCalendar{
 			d1.getMonth() == d2.getMonth() &&
 			d1.getDate() == d2.getDate();
 	}
-	create_day(c){
+	create_day(n, c){
 		var self = this;
 		this.n_days++;
 		var td =  $(`<td role="gridcell" class="${c.today ? 'slds-is-today' : ''}`
 			+ (c.disabled ? ' slds-disabled-text' : '')
 			+ (c.selected ? ' slds-is-selected' : '')
-			+ `"><span class="slds-day" data-year="${c.year}" data-month="${c.month}">${c.day}</span></td>`);
+			+ `"><span class="slds-day">${n}</span></td>`);
 		td.click(function(){
-			var span = $(this).find('span');
-			self.day_selected.bind(self)({
-				day: span.text(),
-				month: span.attr('data-month'),
-				year: span.attr('data-year')
-			});
+			self.day_selected.bind(self)($(this).find('span').text());
 		});
 
 		this.actual_tr.append(td);
@@ -144,10 +127,8 @@ class CustomCalendar{
 		this.update_input();
 		this.update_calendar();
 	}
-	day_selected(c){
-		this.actual_date.setDate(c.day);
-		this.actual_date.setMonth(c.month);
-		this.actual_date.setFullYear(c.year);
+	day_selected(day){
+		this.actual_date.setDate(day);
 		this.update_input();
 		this.hide();
 	}
@@ -167,6 +148,7 @@ class CustomCalendar{
 		this.divs.trigger_div.removeClass('slds-is-open');
 	}
 	toggle(){
+		if(this.divs.input_container.find('input').attr('disabled'))return;
 		this.update_calendar();
 		this.divs.trigger_div.toggleClass('slds-is-open');
 	}
