@@ -73,6 +73,18 @@
 
 
 	function onRender() {
+		$.get('/data.json', function(data){
+			var type = $('#type');
+			var sender = $('#sender');
+			for(let i =0;i<data.type.length;i++){
+				type.append(data.type[i]);
+			}
+			for(let i =0;i<data.sender.length;i++){
+				sender.append(data.sender[i]);
+			}
+		});
+
+
 		$('#test_message_button').click(function(){
 			$('#message_test_success').hide();
 			$('#message_test_error').hide();

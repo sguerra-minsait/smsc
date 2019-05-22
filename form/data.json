@@ -1,0 +1,13 @@
+{
+	"type": [
+		"Commercial",
+		"Informative",
+		"Normative",
+		"Transactional"
+	],
+	"sender": [
+		"672123423",
+		"662533463",
+		"672166553"
+	]
+}
