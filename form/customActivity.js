@@ -77,10 +77,13 @@
 			var type = $('#type');
 			var sender = $('#sender');
 			for(let i =0;i<data.type.length;i++){
-				type.append(data.type[i]);
+				var t = data.type[i];
+				type.append($('<option value="' + t + '">' + t + "</option>"));
 			}
 			for(let i =0;i<data.sender.length;i++){
-				sender.append(data.sender[i]);
+				var t = data.sender[i];
+				sender.append($('<option value="' + t + '">' + t + "</option>"));
+			
 			}
 		});
 
