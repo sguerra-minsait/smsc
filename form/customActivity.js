@@ -175,7 +175,8 @@
 				break;
 			case 3:
 				$('#testing').show();
-				$('#message').trigger('keyup');
+				$('#message_preview').val($('#message').val() + "\n" + $('#footer').val());
+				$('#message_preview').trigger('keyup');
 				break;
 			case 4:
 				save();
