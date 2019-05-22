@@ -338,7 +338,6 @@
 
 	function set_height_preview(){
 		var p = document.querySelector('#message_preview');
-		$('#message').val(p.value);
 		p.style.height = 'auto';
 		if(p.scrollHeight > 310)return p.style.height = '310px';
 		if(p.scrollHeight < 50)return p.style.height = '50px';
