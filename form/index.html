@@ -363,9 +363,7 @@
 
 	$('#message').on('change paste keyup cut',function(){
 		var v = this.value;
-		$('#message_preview').val(v);
 		$('#message_rest_space').text((160 - v.length) + " caracteres restantes");
-		set_height_preview();
 	});
 	$('#sender').change(function(){
 		$('#sender_preview').text(this.value);
