@@ -16,7 +16,8 @@ app.post('/execute', security.check_token, (req,res) => {
 	console.log('EXECTURE BODY: ', req.rawBody, req.body);
 	var datos = req.body.inArguments[0];
 	console.log(datos);
-	res.status(Math.random () % 2 == 0 ? 200 : 400).end();
+	//res.status(Math.random () % 2 == 0 ? 200 : 400).end();
+	res.status(500).json({success:false});
 });
 
 
