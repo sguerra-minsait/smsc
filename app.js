@@ -11,12 +11,16 @@ var app = require('./mod/server');
 app.post(/(publish|validate|save)/, security.check_token, (req, res) => {
 	res.status(200).end();
 });
-
+var co = 0;
 app.post('/execute', security.check_token, (req,res) => {
 	console.log('EXECTURE BODY: ', req.rawBody, req.body);
 	var datos = req.body.inArguments[0];
 	console.log(datos);
 	//res.status(Math.random () % 2 == 0 ? 200 : 400).end();
+	if(co < 30){
+		co++;
+		return res.status(200).json({success:true});
+	}
 	res.status(500).json({success:false});
 });
 
