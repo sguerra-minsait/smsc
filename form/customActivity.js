@@ -76,6 +76,7 @@
 		$.get('/data.json', function(data){
 			var type = $('#type');
 			var sender = $('#sender');
+			var footer = $('#footer');
 			for(let i =0;i<data.type.length;i++){
 				var t = data.type[i];
 				type.append($('<option value="' + t + '">' + t + "</option>"));
@@ -83,7 +84,10 @@
 			for(let i =0;i<data.sender.length;i++){
 				var t = data.sender[i];
 				sender.append($('<option value="' + t + '">' + t + "</option>"));
-			
+			}
+			for(let i =0;i<data.footer.length;i++){
+				var t = data.footer[i];
+				footer.append($('<option value="' + t + '">' + t + "</option>"));
 			}
 		});
 
