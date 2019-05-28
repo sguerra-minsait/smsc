@@ -210,10 +210,12 @@
 		console.log('initialize', payload);
 
 		//var inArguments = hasInArguments ? payload['arguments'].execute.inArguments[0] : {};
-		var client_data = payload['client_data'] || [{}];
+		var configurationArguments.save.inArguments = payload.configurationArguments.save.inArguments[0];
 
-		for(var name in client_data[0]){
-			$('[name="' + name + '"]').val(client_data[name]);
+		if(payload.configurationArguments && payload.configurationArguments.save && payload.configurationArguments.save.inArguments){
+			for(var name in configurationArguments.save.inArguments[0]){
+				$('[name="' + name + '"]').val(configurationArguments.save.inArguments[name]);
+			}
 		}
 	}
 	function validate_step(step){
@@ -310,9 +312,9 @@
 		var data = $('#form').serializeArray();
 		console.log(data);
 		payload['arguments'].execute.inArguments = [{}];
-		payload.client_data = [{}];
+		payload.configurationArguments.save.inArguments = [{}];
 		for(var i = 0;i<data.length;i++){
-			payload.client_data[0][data[i].name] = data[i].value;
+			payload.configurationArguments.save.inArguments[0][data[i].name] = data[i].value;
 			data[i].value = lookup_custom_functions(data[i].value);
 			payload['arguments'].execute.inArguments[0][data[i].name] = data[i].value;
 		}
