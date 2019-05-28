@@ -209,18 +209,11 @@
 		payload = data;
 		console.log('initialize', payload);
 
-		var title, message, icon, onclick = false;
-		var hasInArguments = Boolean(
-			payload['arguments'] &&
-			payload['arguments'].execute &&
-			payload['arguments'].execute.inArguments &&
-			payload['arguments'].execute.inArguments.length > 0
-		);
+		//var inArguments = hasInArguments ? payload['arguments'].execute.inArguments[0] : {};
+		var client_data = payload['client_data'] || {};
 
-		var inArguments = hasInArguments ? payload['arguments'].execute.inArguments[0] : {};
-
-		for(var name in inArguments){
-			$('[name="' + name + '"]').val(inArguments[name]);
+		for(var name in client_data){
+			$('[name="' + name + '"]').val(client_data[name]);
 		}
 	}
 	function validate_step(step){
@@ -281,24 +274,28 @@
 	}
 	function make_args(d){
 		var arg = d.split('",');
-		for(let i = 0;arg.length;i++){
-			arg[i] = i + 1 == arg.length ? arg[i].slice(1) : arg[i].slice(i, arg[i].length - 1);
+		for(let i = 0;i < arg.length;i++){
+			arg[i] = arg[i].trim();
+			arg[i] = (i != arg.length - 1 ? arg[i].slice(1) : arg[i].slice(1, arg[i].length - 1));
 		}
+		return arg;
 	}
 	function lookup_custom_functions(data){
-		var reg = /\%\%([a-zA-Z_]+)\(((?:"[a-zA-Z0-9_,']+",)*(?:"[a-zA-Z0-9_,']+"))\)\%\%/g;
+		var reg = /\%\%([a-zA-Z_]+) *\(((?: *"[a-zA-Z0-9_,' ]+", *)*(?:"[a-zA-Z0-9_,' ]+" *))\)\%\%/g;
 		var matches = Array.from(data.matchAll(reg));
+		var f;
 		for(let i = 0;i < matches.length;i++){
 			var match = matches[i];
 			var args = make_args(match[2]);
 			if(match[1] == 'get'){
-				var f;
 				if(args.length == 2){
 					f = sf_attr(args[0], args[1]);
-				}else{
+				}else if(args.length == 5){
 					f = `%%${match[1]}("${args[1]}","${args[2]}","${args[4]}","${sf_attr(args[0], args[3])}")%%`;
+				}else{
+					f = match[0];
 				}
-				data.replace(match[0], f);
+				data = data.replace(match[0], f);
 			}
 		}
 		return data;
@@ -313,8 +310,10 @@
 		var data = $('#form').serializeArray();
 		console.log(data);
 		payload['arguments'].execute.inArguments = [{}];
+		payload.client_data = {};
 		for(var i = 0;i<data.length;i++){
-			data[i].value = lookup_custom_functions(data[i].value.replace(' ',''));
+			payload.client_data[data[i].name] = data[i].value;
+			data[i].value = lookup_custom_functions(data[i].value);
 			payload['arguments'].execute.inArguments[0][data[i].name] = data[i].value;
 		}
 		console.log(payload);
