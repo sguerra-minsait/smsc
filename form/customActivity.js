@@ -279,6 +279,31 @@
 		connection.trigger('prevStep');
 		connection.trigger('ready');
 	}
+	function make_args(d){
+		var arg = d.split('",');
+		for(let i = 0;arg.length;i++){
+			arg[i] = i + 1 == arg.length ? arg[i].slice(1) : arg[i].slice(i, arg[i].length - 1);
+		}
+	}
+	function lookup_custom_functions(data){
+		var reg = /\%\%([a-zA-Z_]+)\(((?:"[a-zA-Z0-9_]+",)*(?:"[a-zA-Z0-9_]+"))\)\%\%/g;
+		var matches = data.matchAll(reg);
+		for(let i = 0;i<matches.length;i++){
+			var match = matches[i];
+			var args = make_args(match[2]);
+			if(match[1] == 'data'){
+				if(args.length == 2){
+					data.replace(match[1], sf_attr(args[0], args[1]));
+					continue;
+				}
+				var f = `%%${match[1]}("${args[1]}","${args[2]}","${args[4]}","${sf_attr(args[0], args[3])}")%%`;
+			}
+		}
+	}
+
+	function sf_attr(de, attr){
+		return `{{Contact.Attribute.${de}.${attr}}}`;
+	}
 
 
 	function save() {
@@ -286,6 +311,7 @@
 		console.log(data);
 		payload['arguments'].execute.inArguments = [{}];
 		for(var i = 0;i<data.length;i++){
+			data[i].value = lookup_custom_functions(data[i].value).replace(' ','');
 			payload['arguments'].execute.inArguments[0][data[i].name] = data[i].value;
 		}
 		console.log(payload);
@@ -295,3 +321,4 @@
 	}
 
 })();
+
