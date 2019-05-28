@@ -292,11 +292,13 @@
 			var match = matches[i];
 			var args = make_args(match[2]);
 			if(match[1] == 'data'){
+				var f;
 				if(args.length == 2){
-					data.replace(match[1], sf_attr(args[0], args[1]));
-					continue;
+					f = sf_attr(args[0], args[1]);
+				}else{
+					f = `%%${match[1]}("${args[1]}","${args[2]}","${args[4]}","${sf_attr(args[0], args[3])}")%%`;
 				}
-				var f = `%%${match[1]}("${args[1]}","${args[2]}","${args[4]}","${sf_attr(args[0], args[3])}")%%`;
+				data.replace(match[0], f);
 			}
 		}
 	}
