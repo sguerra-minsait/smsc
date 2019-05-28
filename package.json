@@ -20,6 +20,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.1",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "wsdlrdr": "^0.5.5"
   }
 }

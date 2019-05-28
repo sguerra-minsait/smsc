@@ -2,13 +2,13 @@ const express = require('express');
 
 
 var app = express();
-/*app.use(function (req, res, next) {
+app.use(function (req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 	res.setHeader("Access-Control-Allow-Headers", "x-requested-with, Content-Type, origin, authorization, accept, client-security-token");
 	next();
 });
-*/
+
 
 app.use('/', express.static(__dirname + './../form'));
 app.use((req, res, next) => {

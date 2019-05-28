@@ -4,6 +4,7 @@ console.log("Loading...");
 
 const security = require('./mod/security');
 const post = require('./mod/post_request');
+var parse_data_ext = require('./mod/parse_data_ext');
 var port = process.env.PORT || 3000;
 
 var app = require('./mod/server');
@@ -11,17 +12,25 @@ var app = require('./mod/server');
 app.post(/(publish|validate|save)/, security.check_token, (req, res) => {
 	res.status(200).end();
 });
-var co = 0;
+
 app.post('/execute', security.check_token, (req,res) => {
 	console.log('EXECTURE BODY: ', req.rawBody, req.body);
 	var datos = req.body.inArguments[0];
-	console.log(datos);
-	//res.status(Math.random () % 2 == 0 ? 200 : 400).end();
-	if(co < 30){
-		co++;
-		return res.status(200).json({success:true});
+	var keys = Object.keys(datos);
+
+	var c = 0;
+	function parse(){
+		parse_data_ext(datos[keys[c]]).then(r => {
+			datos[keys[c]] = r;
+			if(c >= keys.length){
+				return console.log(datos);
+			}
+			c++;
+			parse();
+		});
 	}
-	res.status(500).json({success:false});
+
+	console.log(datos);
 });
 
 
@@ -63,7 +72,7 @@ app.post('/send_message', (req, res) => {
 /*{
     "message-count": "1",
     "messages": [{
-        "to": "34672054149",
+        "to": "",
         "message-id": "140000002AE2CFB3",
         "status": "0",
         "remaining-balance": "1.03220000",
