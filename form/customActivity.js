@@ -287,8 +287,8 @@
 	}
 	function lookup_custom_functions(data){
 		var reg = /\%\%([a-zA-Z_]+)\(((?:"[a-zA-Z0-9_]+",)*(?:"[a-zA-Z0-9_]+"))\)\%\%/g;
-		var matches = data.matchAll(reg);
-		for(let i = 0;i<matches.length;i++){
+		var matches = Array.from(data.matchAll(reg));
+		for(let i = 0;i < matches.length;i++){
 			var match = matches[i];
 			var args = make_args(match[2]);
 			if(match[1] == 'data'){
@@ -301,6 +301,7 @@
 				data.replace(match[0], f);
 			}
 		}
+		return data;
 	}
 
 	function sf_attr(de, attr){
