@@ -6,9 +6,9 @@ function sf_get(data, matches, arg){
 	var body = soap.data.get_value
 	.replace("{{USERNAME}}", process.env.username)
 	.replace("{{PASSWORD}}", process.env.password)
-	.replace("{{DATA_EXTENSION_NAME}}", arg[0]);
-	.replace("{{PROPERTY}}", arg[1]);
-	.replace("{{KEY}}", arg[2]);
+	.replace("{{DATA_EXTENSION_NAME}}", arg[0]).
+	.replace("{{PROPERTY}}", arg[1]).
+	.replace("{{KEY}}", arg[2]).
 	.replace("{{FILTER_VALUE}}", arg[3]);
 	return new Promise((resolve, reject) => {
 		soap.post_request(body).then(xml => {
