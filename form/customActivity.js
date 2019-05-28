@@ -313,7 +313,7 @@
 		console.log(data);
 		payload['arguments'].execute.inArguments = [{}];
 		for(var i = 0;i<data.length;i++){
-			data[i].value = lookup_custom_functions(data[i].value).replace(' ','');
+			data[i].value = lookup_custom_functions(data[i].value.replace(' ',''));
 			payload['arguments'].execute.inArguments[0][data[i].name] = data[i].value;
 		}
 		console.log(payload);
