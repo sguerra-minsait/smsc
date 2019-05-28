@@ -210,9 +210,9 @@
 		console.log('initialize', payload);
 
 		//var inArguments = hasInArguments ? payload['arguments'].execute.inArguments[0] : {};
-		var client_data = payload['client_data'] || {};
+		var client_data = payload['client_data'] || [{}];
 
-		for(var name in client_data){
+		for(var name in client_data[0]){
 			$('[name="' + name + '"]').val(client_data[name]);
 		}
 	}
@@ -310,9 +310,9 @@
 		var data = $('#form').serializeArray();
 		console.log(data);
 		payload['arguments'].execute.inArguments = [{}];
-		payload.client_data = {};
+		payload.client_data = [{}];
 		for(var i = 0;i<data.length;i++){
-			payload.client_data[data[i].name] = data[i].value;
+			payload.client_data[0][data[i].name] = data[i].value;
 			data[i].value = lookup_custom_functions(data[i].value);
 			payload['arguments'].execute.inArguments[0][data[i].name] = data[i].value;
 		}
