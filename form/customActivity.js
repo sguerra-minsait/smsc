@@ -209,14 +209,12 @@
 		payload = data;
 		console.log('initialize', payload);
 
-		//var inArguments = hasInArguments ? payload['arguments'].execute.inArguments[0] : {};
-		var configurationArguments.save.inArguments = payload.configurationArguments.save.inArguments[0];
-
-		if(payload.configurationArguments && payload.configurationArguments.save && payload.configurationArguments.save.inArguments){
-			for(var name in configurationArguments.save.inArguments[0]){
-				$('[name="' + name + '"]').val(configurationArguments.save.inArguments[name]);
+		try{
+			var inArguments = payload.configurationArguments.save.inArguments[0];
+			for(var name in inArguments){
+				$('[name="' + name + '"]').val(inArguments[name]);
 			}
-		}
+		}catch(err){}
 	}
 	function validate_step(step){
 		var errors = [];
