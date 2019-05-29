@@ -12,91 +12,6 @@
 <link rel="stylesheet" type="text/css" href="css/salesforce-lightning-design-system.min.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet" type="text/css" href="css/samsung_fonts.css">
-
-<style type="text/css">
-	html{
-		background: white;
-	}
-	body {
-		padding: 20px;
-		margin: 0;
-		background: white;
-	}
-	.step {
-		display: block;
-	}
-	#template {
-		display: block;
-	}
-	#short_url_loading, #short_url_message, #loading_message, #message_test_error, #message_test_success{
-		display: none;
-	}
-	#short_url_button{
-		width: 200px;
-		height: 40px;
-		margin-right: 20px;
-	}
-	#message_test_error, #message_test_success{
-		margin-top: 20px;
-	}
-	#phone_preview_container{
-		position: relative;
-		width: 278px;
-		height: 490px;
-		overflow: hidden;
-		float: left;
-		font-family: "Salesforce Sans",Arial,sans-serif;
-	}
-	#phone_preview_container img{
-		position: absolute;
-	}
-	#message_preview{
-		-webkit-appearance: none;
-		-moz-appearance: none;
-		appearance: none;
-		background: transparent;
-		font-size: 12px;
-		color: black;
-		border: none;
-		outline: none;
-		resize: none;
-		position: absolute;
-		top: 74px;
-		left: 65px;
-		padding: 4px;
-		width: 182px;
-		height: 62px;
-		background: #ececec;
-		font-family: Arial;
-	}
-	#sender_preview{
-		position: absolute;
-		width: 50px;
-		height: 20px;
-		top: 41px;
-		left: 52px;
-		letter-spacing: 1px;
-		color: #666;
-		font-weight: bold;
-	}
-	#time_preview{
-		position: absolute;
-		left: 37px;
-		top: 20px;
-		font-size: 10px;
-		color: #666;
-		cursor: default;
-	}
-	.select_time_picker[disabled]{
-		background-color: #ecebea;
-		border-color: #c9c7c5;
-		cursor: not-allowed;
-		-webkit-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
-	}
-</style>
 </head>
 <body>
 <form id="form" action="javascript:void(0)">
@@ -104,7 +19,7 @@
 	<div class="slds-form-element">
 		<label class="slds-form-element__label" for="message">Message(<font style="color:red">*</font>)</label>
 		<div class="slds-form-element__control">
-			<textarea id="message" name="message" class="slds-textarea" maxlength="160" placeholder="Type your message" rows="5"></textarea>
+			<textarea id="message" value='Esto es una prueba %%get("de1", "prop")%%' name="message" class="slds-textarea" placeholder="Type your message" rows="5"></textarea>
 			<font id="message_rest_space"></font>
 		</div>
 		<div class="slds-text-color_error"></div>
@@ -294,7 +209,7 @@
 					<svg class="slds-button__icon" aria-hidden="true">
 					<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
 					</svg>
-					<span class="slds-assistive-text" >Close</span>
+					<span class="slds-assistive-text">Close</span>
 				</button>
 			</div>
 		</div>
@@ -318,15 +233,29 @@
 		</div>
 	</div>
 	<div id="phone_preview_container">
-		<img src="images/android_sms_preview_2.png">
-		<textarea id="message_preview" maxlength="160" spellcheck="false" disabled="disabled"></textarea>
+		<div class="phone_image_preview_container">
+			<img src="images/android_sms_preview_2.png">
+		</div>
+		<div id="message_preview"></div>
 		<div id="sender_preview"></div>
 		<div id="time_preview"></div>
 	</div>
 </div>
 <!--<div id="error_box" class="slds-text-color_error"></div>-->
 </form>
+<div id="popup"></div>
+
+
 <script>
+
+function show_popup(data){
+	data = decodeURIComponent(data);
+	$('#popup').text(data).css('display', 'block');
+}
+function hide_popup(){
+	$('#popup').css('display', 'none');
+}
+
 (function(){
 	var year = new Date().getFullYear();
 	var c = new CustomCalendar($('#maintain_date'), {
@@ -334,6 +263,7 @@
 	});
 
 	function set_height_preview(){
+		return;
 		var p = document.querySelector('#message_preview');
 		p.style.height = 'auto';
 		if(p.scrollHeight > 310)return p.style.height = '310px';
@@ -351,18 +281,72 @@
 
 
 
+/*
 	var message_preview = document.querySelector('#message_preview');
 	message_preview.setAttribute('style', 'height:' + (message_preview.scrollHeight) + 'px;overflow-y:hidden;');
 	$(message_preview).on('input change keyup cut', function () {
 		set_height_preview();
 	});
+*/
 
 	$('#message').on('change paste keyup cut',function(){
 		var v = this.value;
-		$('#message_rest_space').text((160 - v.length) + " caracteres restantes");
+		$('#message_rest_space').text(v.length + " caracteres de 160");
 	});
 	$('#sender').change(function(){
 		$('#sender_preview').text(this.value);
+	});
+
+
+	$(document).ready(function(){
+		var xMousePos = 0;
+		var yMousePos = 0;
+		var lastScrolledLeft = 0;
+		var lastScrolledTop = 0;
+
+		$(document).mousemove(function(event) {
+			xMousePos = event.pageX;
+			yMousePos = event.pageY;
+			movePopup();
+		})  
+
+		$(window).scroll(function(event) {
+			if(lastScrolledLeft != $(document).scrollLeft()){
+				xMousePos -= lastScrolledLeft;
+				lastScrolledLeft = $(document).scrollLeft();
+				xMousePos += lastScrolledLeft;
+			}
+			if(lastScrolledTop != $(document).scrollTop()){
+				yMousePos -= lastScrolledTop;
+				lastScrolledTop = $(document).scrollTop();
+				yMousePos += lastScrolledTop;
+			}
+			movePopup();
+		});
+		function movePopup(event){
+			var frame = {
+				width: $(document).width(),
+				height: $(document).height()
+			}
+
+			var popup = $('#popup');
+			var width = parseInt(popup.css('width'));
+			var height = parseInt(popup.css('height'));
+			var left = xMousePos - width/2;
+			var top = yMousePos - height - 10;
+
+			if(xMousePos - lastScrolledLeft - width/2 <= 0){
+				left = 0;
+			}else if(xMousePos - lastScrolledLeft + width/2 + 2 >= frame.width){
+				left = frame.width - width - 2;
+			}
+
+			popup.css({
+				left: left,
+				top: yMousePos - lastScrolledTop - height > 0 ? top : lastScrolledTop
+			});
+		}
+	 
 	});
 
 

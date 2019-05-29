@@ -1,3 +1,96 @@
+html{
+	background: white;
+}
+body {
+	padding: 20px;
+	margin: 0;
+	background: white;
+}
+.step {
+	display: block;
+}
+#template {
+	display: block;
+}
+#short_url_loading, #short_url_message, #loading_message, #message_test_error, #message_test_success{
+	display: none;
+}
+#short_url_button{
+	width: 200px;
+	height: 40px;
+	margin-right: 20px;
+}
+#message_test_error, #message_test_success{
+	margin-top: 20px;
+}
+#phone_preview_container{
+	position: relative;
+	width: 278px;
+	height: 490px;
+	float: left;
+	font-family: "Salesforce Sans",Arial,sans-serif;
+}
+
+.phone_image_preview_container{
+	position: absolute;
+	width: 278px;
+	height: 490px;
+	overflow: hidden;
+}
+
+.phone_image_preview_container img{
+	position: absolute;
+}
+#message_preview{
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	background: transparent;
+	font-size: 12px;
+	color: black;
+	border: none;
+	outline: none;
+	resize: none;
+	position: absolute;
+	top: 74px;
+	left: 65px;
+	padding: 4px;
+	width: 182px;
+	height: 62px;
+	background: #ececec;
+	font-family: Arial;
+}
+#message_preview font{
+	cursor: default;
+}
+#sender_preview{
+	position: absolute;
+	width: 50px;
+	height: 20px;
+	top: 41px;
+	left: 52px;
+	letter-spacing: 1px;
+	color: #666;
+	font-weight: bold;
+}
+#time_preview{
+	position: absolute;
+	left: 37px;
+	top: 20px;
+	font-size: 10px;
+	color: #666;
+	cursor: default;
+}
+.select_time_picker[disabled]{
+	background-color: #ecebea;
+	border-color: #c9c7c5;
+	cursor: not-allowed;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
 .select_time_picker{
 	display: inline-block;
 	padding: 5px 34px 4px 10px;
@@ -23,5 +116,48 @@
     margin: 20px 20px;
     font-size: 15px;
     list-style-type: decimal;
+    font-family: "Salesforce Sans",Arial,sans-serif;
+}
+
+
+.de_custom_prop{
+	display: inline-block;
+	position: relative;
+	background: rgba(0, 112, 210, 0.7);
+	cursor: help;
+	color: white;
+	padding: 2px;
+	border-radius: 6px;
+}
+.de_custom_prop:hover{
+	background: rgba(0, 112, 210, 1);	
+}
+.de_custom_prop_comp{
+	background: rgba(210, 0,0,0.7);
+}
+.de_custom_prop_comp:hover{
+	background: rgba(210, 0,0,1);
+}
+
+.de_custom_prop_help{
+	display: none;
+	position: absolute;
+	top: -50px;
+	left: 0;
+	z-index: 9999;
+	background: white;
+	border: 1px solid #ccc;
+	border-radius: 15px;
+}
+
+
+#popup{
+	display: none;
+	position: absolute;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 7px;
+	background: #214882;
+	color: white;
     font-family: "Salesforce Sans",Arial,sans-serif;
 }

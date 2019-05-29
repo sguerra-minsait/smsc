@@ -12,6 +12,7 @@
 	var heroku_url = 'https://pushintegration.herokuapp.com';
 	//var url_reg = /(https?\:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
 	var url_reg = /((https?\:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
+	var custom_param_reg = /\%\%([a-zA-Z_]+) *\(((?: *"[a-zA-Z0-9_,' ]+", *)*(?:"[a-zA-Z0-9_,' ]+" *))\)\%\%/g;
 
 	var document_ready = false;
 
@@ -184,8 +185,57 @@
 		connection.trigger('updateButton', { button: 'next', enabled: true});
 	}
 
+	function preview_data_div(){
+		var container = `
+			<div class="preview_data_div">
+
+			</div>
+		`;
+	}
+
+	function message_preview(){
+		var message = $('#message').val();
+		var footer = $('#footer').val();
+		var container = $('#message_preview');
+
+		container.html('');
+		custom_param_reg.lastIndex = 0;
+		var lastIndex, index;
+
+
+		function create_font(d){
+			return $(`<font>${d}</font>`);
+		}
+		function create_div(full, prop, css_class){
+			full = full.substring(2, full.length - 3);
+			return $(`
+				<div class="de_custom_prop ${css_class || ''}" onmouseover="show_popup('${encodeURIComponent(full)}')" onmouseout="hide_popup()">
+					<div class="de_custom_prop_data">${prop}</div>
+				</div>`);
+		}
+
+
+		do{
+			lastIndex = custom_param_reg.lastIndex;
+			var match = custom_param_reg.exec(message);
+			index = match ? match.index : message.length;
+
+			container.append(create_font(message.substring(lastIndex, index)));
+			
+			if(!match || match[1] != 'get')continue;
+			var args = make_args(match[2]);
+			
+			if(args.length == 2){
+				container.append(create_div(match[0], args[1]));
+			}else{
+				container.append(create_div(match[0], args[2], 'de_custom_prop_comp'));
+			}
+		}while(match != null);
+		container.append(create_font(footer));
+	}
+
 	function gotoStep(step) {
-		$('.step').hide();
+		//$('.step').hide();
 		switch(step) {
 			case 1:
 				$('#template').show();
@@ -195,15 +245,13 @@
 				break;
 			case 3:
 				$('#testing').show();
-				$('#message_preview').val($('#message').val() + "\n" + $('#footer').val());
-				$('#message_preview').trigger('keyup');
+				message_preview();
 				break;
 			case 4:
 				save();
 				break;
 		}
 	};
-
 
 
 	function initialize (data) {
@@ -285,11 +333,9 @@
 		return arg;
 	}
 	function lookup_custom_functions(data){
-		var reg = /\%\%([a-zA-Z_]+) *\(((?: *"[a-zA-Z0-9_,' ]+", *)*(?:"[a-zA-Z0-9_,' ]+" *))\)\%\%/g;
-		var matches = Array.from(data.matchAll(reg));
-		var f;
-		for(let i = 0;i < matches.length;i++){
-			var match = matches[i];
+		var match, f;
+		do{
+			match = custom_param_reg.exec(data);
 			var args = make_args(match[2]);
 			if(match[1] == 'get'){
 				if(args.length == 2){
@@ -301,7 +347,7 @@
 				}
 				data = data.replace(match[0], f);
 			}
-		}
+		}while(match != null);
 		return data;
 	}
 
@@ -325,6 +371,4 @@
 		payload['metaData'].isConfigured = true;
 		connection.trigger('updateActivity', payload);
 	}
-
 })();
-
