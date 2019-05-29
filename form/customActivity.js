@@ -235,7 +235,7 @@
 	}
 
 	function gotoStep(step) {
-		//$('.step').hide();
+		$('.step').hide();
 		switch(step) {
 			case 1:
 				$('#template').show();
