@@ -4,7 +4,10 @@ module.exports = function(){
 		'SH256_KEY',
 		'username',
 		'password',
-		'server_domain'
+		'server_domain',
+		'bitly_auth',
+		'bitly_url',
+		'bityl_user'
 	].forEach(d => {
 		if(!process.env[d]){
 			missing = true;

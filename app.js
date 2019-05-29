@@ -17,12 +17,14 @@ app.post('/execute', security.check_token, (req,res) => {
 	console.log('EXECTURE BODY: ', req.rawBody, req.body);
 	var datos = req.body.inArguments[0];
 	var keys = Object.keys(datos);
-
+	console.log(keys);
+	console.log(datos[keys[0]]);
 	var c = 0;
 	function parse(){
 		parse_data_ext(datos[keys[c]]).then(r => {
+			console.log('parse_data_ext RESULT ', r);
 			datos[keys[c]] = r;
-			if(c >= keys.length){
+			if(c == keys.length - 1){
 				return console.log(datos);
 			}
 			c++;
@@ -52,10 +54,10 @@ app.post('/short', (req, res) => {
 	}).then((body, response) => {
 		var data = JSON.parse(body);
 		console.log(data);
-		res.end(JSON.stringify({url: data.data.link}));
+		res.json({url: data.data.url});
 	}).catch(err => {
 		console.log(err);
-		res.end(JSON.stringify({error: err.message}));
+		res.json({error: err.message});
 	});
 });
 

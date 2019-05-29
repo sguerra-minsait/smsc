@@ -16,7 +16,7 @@
     <ObjectType>DataExtensionObject[{{DATA_EXTENSION_NAME}}]</ObjectType>
     <Properties>{{PROPERTY}}</Properties>
     <Filter xsi:type="SimpleFilterPart">
-       <Property>{{KEY}}}</Property>
+       <Property>{{KEY}}</Property>
        <SimpleOperator>equals</SimpleOperator>
        <Value>{{FILTER_VALUE}}</Value>
     </Filter>
