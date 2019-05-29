@@ -27,9 +27,11 @@ app.post('/execute', security.check_token, (req,res) => {
 			}
 			c++;
 			parse();
+		}).catch(err => {
+			console.log('PARSE ERROR' + err);
 		});
 	}
-
+	parse();
 	console.log(datos);
 });
 
