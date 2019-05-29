@@ -13,7 +13,7 @@
 	//var url_reg = /(https?\:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
 	var url_reg = /((https?\:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
 
-
+	var document_ready = false;
 
 	$(window).ready(onRender);
 
@@ -89,6 +89,7 @@
 				var t = data.footer[i];
 				footer.append($('<option value="' + t + '">' + t + "</option>"));
 			}
+			document_ready = true;
 		});
 
 
@@ -208,13 +209,16 @@
 	function initialize (data) {
 		payload = data;
 		console.log('initialize', payload);
-
-		try{
-			var inArguments = payload.configurationArguments.save.inArguments[0];
-			for(var name in inArguments){
-				$('[name="' + name + '"]').val(inArguments[name]);
-			}
-		}catch(err){}
+		var tmp_int = setInterval(function(){
+			if(!document_ready)return;
+			try{
+				var inArguments = payload.configurationArguments.save.inArguments[0];
+				for(var name in inArguments){
+					$('[name="' + name + '"]').val(inArguments[name]);
+				}
+			}catch(err){}
+			clearInterval(tmp_int);
+		}, 100);
 	}
 	function validate_step(step){
 		var errors = [];
