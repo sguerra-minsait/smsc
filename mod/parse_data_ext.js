@@ -1,5 +1,5 @@
 var wsdlParser = require("wsdlrdr");
-var soap = require('post_request');
+var soap = require('./post_request');
 
 function sf_get(data, matches, arg){
 	console.log('sf_get', data, matches, arg);
