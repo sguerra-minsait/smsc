@@ -38,16 +38,19 @@ app.post('/short', (req, res) => {
 	var long_url = req.body.long_url;
 	console.log(long_url);
 	post({
-		url: 'https://api-ssl.bitly.com/v4/shorten',
-		body: {long_url: long_url},
+		url: process.env.bitly_url,
+		body: {
+			user: process.env.bityl_user,
+			longUrl: long_url
+		},
 		headers: {
-			'Authorization': 'Bearer ' + process.env.bearer_bityl,
+			'Authorization': 'Basic ' + process.env.bitly_auth,
 			'Content-Type': 'application/json'
 		}
 	}).then((body, response) => {
 		var data = JSON.parse(body);
 		console.log(data);
-		res.end(JSON.stringify({url: data.link}));
+		res.end(JSON.stringify({url: data.data.link}));
 	}).catch(err => {
 		console.log(err);
 		res.end(JSON.stringify({error: err.message}));
