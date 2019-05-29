@@ -56,9 +56,11 @@ body {
 	left: 65px;
 	padding: 4px;
 	width: 182px;
-	height: 62px;
+	min-height: 62px;
+	max-height: 416px;
 	background: #ececec;
 	font-family: Arial;
+	overflow: hidden;
 }
 #message_preview font{
 	cursor: default;
@@ -123,17 +125,18 @@ body {
 .de_custom_prop{
 	display: inline-block;
 	position: relative;
-	background: rgba(0, 112, 210, 0.7);
+	background: rgba(0, 112, 210, 0.3);
 	cursor: help;
 	color: white;
-	padding: 2px;
+	padding: 0px 2px;
 	border-radius: 6px;
+	transition: all .5s;
 }
 .de_custom_prop:hover{
 	background: rgba(0, 112, 210, 1);	
 }
 .de_custom_prop_comp{
-	background: rgba(210, 0,0,0.7);
+	background: rgba(210, 0,0,0.3);
 }
 .de_custom_prop_comp:hover{
 	background: rgba(210, 0,0,1);
@@ -144,7 +147,7 @@ body {
 	position: absolute;
 	top: -50px;
 	left: 0;
-	z-index: 9999;
+	z-index: 99;
 	background: white;
 	border: 1px solid #ccc;
 	border-radius: 15px;
@@ -160,4 +163,10 @@ body {
 	background: #214882;
 	color: white;
     font-family: "Salesforce Sans",Arial,sans-serif;
+}
+
+#message_help_button{
+	z-index: 9999;
+	float: right;
+	box-shadow: none;
 }
