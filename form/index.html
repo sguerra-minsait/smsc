@@ -265,7 +265,7 @@
 
 <script>
 
-function show_popup(data, html){
+function show_popup(data, html, effect, hide_on_mouseout, disable_movement){
 	var popup = $('#popup');
 	if(!html){
 		data = decodeURIComponent(data);
@@ -273,13 +273,39 @@ function show_popup(data, html){
 	}else{
 		popup.html(data);
 	}
-	popup.css({display: 'block', left: 0});
+
+	popup.attr('data-hide_mouseup', hide_on_mouseout);
+	popup.attr('data-hide_effect', effect);
+	popup.css({display: 'block', left: 0, opacity: 0});
+	movePopup();
+	popup.attr('data-disable_movement', disable_movement);
+
+	if(!effect){
+		popup.css({opacity: 1});
+	}else{
+		popup.animate({opacity: 1});
+	}
 }
 function hide_popup(){
 	$('#popup').css('display', 'none');
 }
 
+
+
 (function(){
+	var popup = $('#popup');
+	popup.on('mouseleave', function(){
+		if(popup.attr('data-hide_mouseup') == 'true'){
+			if(0 && popup.attr('data-hide_effect') == 'true'){
+				/*popup.animate({opacity: 0}, function(){
+					popup.css({display: 'none'});
+				}); */
+			}else{
+				popup.css({display: 'none'});
+			}
+		}
+	});
+
 	var year = new Date().getFullYear();
 	var c = new CustomCalendar($('#maintain_date'), {
 		years: {from: year, to: year + 50}
@@ -316,10 +342,10 @@ function hide_popup(){
 			`<font>You can insert data directly from your Data Extensions using the following syntax</font>
 			<div align="center">%%get("DE1","DE2","Field","Key1","Key2")%%</div>
 			DE1 is always the name of the DE in the Entry Source`,
-			 true);
+			 true, true, true, true);
 	}).mouseout(function(){
-		hide_popup();
-	})
+		
+	});
 
 
 	$('#message').on('change paste keyup cut',function(){
@@ -356,13 +382,15 @@ function hide_popup(){
 			}
 			movePopup();
 		});
-		function movePopup(event){
+		window.movePopup = function(){
+			var popup = $('#popup');
+			if(popup.attr('data-disable_movement') == 'true' && popup.css('opacity') != 0)return;
 			var frame = {
 				width: $(document).width(),
 				height: $(document).height()
 			}
 
-			var popup = $('#popup');
+			
 			var width = parseInt(popup.css('width'));
 			var height = parseInt(popup.css('height'));
 			var left = xMousePos - width/2;
