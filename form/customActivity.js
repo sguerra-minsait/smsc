@@ -334,8 +334,9 @@
 	}
 	function lookup_custom_functions(data){
 		var match, f;
-		do{
-			match = custom_param_reg.exec(data);
+		match = custom_param_reg.exec(data);
+		
+		while(match != null){
 			var args = make_args(match[2]);
 			if(match[1] == 'get'){
 				if(args.length == 2){
@@ -347,7 +348,8 @@
 				}
 				data = data.replace(match[0], f);
 			}
-		}while(match != null);
+			match = custom_param_reg.exec(data);
+		}
 		return data;
 	}
 
