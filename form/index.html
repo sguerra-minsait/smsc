@@ -280,11 +280,11 @@ function show_popup(c){
 		popup.attr('class', '');
 	}
 
-	popup.attr('data-hide_mouseup', c.hide_on_mouseout);
-	popup.attr('data-hide_effect', c.effect);
+	popup.attr('data-hide_mouseup', c.hide_on_mouseout || '');
+	popup.attr('data-hide_effect', c.effect || '');
 	popup.css({display: 'block', left: 0, opacity: 0});
 	movePopup();
-	popup.attr('data-disable_movement', c.disable_movement);
+	popup.attr('data-disable_movement', c.disable_movement || '');
 
 	if(!c.effect){
 		popup.css({opacity: 1});
