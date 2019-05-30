@@ -206,10 +206,10 @@
 		function create_font(d){
 			return $(`<font>${d}</font>`);
 		}
-		function create_div(full, prop, css_class){
-			full = full.substring(2, full.length - 3);
+		function create_div(full, prop, css_class_popup, css_class){
+			full = full.substring(2, full.length - 2);
 			return $(`
-				<div class="de_custom_prop ${css_class || ''}" onmouseover="show_popup('${encodeURIComponent(full)}')" onmouseout="hide_popup()">
+				<div class="de_custom_prop ${css_class || ''}" onmouseover="show_popup({data:'${encodeURIComponent(full)}', class:'${css_class_popup}'})" onmouseout="hide_popup()">
 					<div class="de_custom_prop_data">${prop}</div>
 				</div>`);
 		}
@@ -226,9 +226,9 @@
 			var args = make_args(match[2]);
 			
 			if(args.length == 2){
-				container.append(create_div(match[0], args[1]));
+				container.append(create_div(match[0], args[1], 'de_custom_prop_popup'));
 			}else{
-				container.append(create_div(match[0], args[2], 'de_custom_prop_comp'));
+				container.append(create_div(match[0], args[2], 'de_custom_prop_comp_popup', 'de_custom_prop_comp'));
 			}
 		}while(match != null);
 		container.append(create_font(footer));
