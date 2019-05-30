@@ -265,22 +265,28 @@
 
 <script>
 
-function show_popup(data, html, effect, hide_on_mouseout, disable_movement){
+function show_popup(c){
 	var popup = $('#popup');
-	if(!html){
-		data = decodeURIComponent(data);
-		popup.text(data);
+	if(!c.html){
+		c.data = decodeURIComponent(c.data);
+		popup.text(c.data);
 	}else{
-		popup.html(data);
+		popup.html(c.data);
 	}
 
-	popup.attr('data-hide_mouseup', hide_on_mouseout);
-	popup.attr('data-hide_effect', effect);
+	if(c.class){
+		popup.attr('class', c.class);
+	}else{
+		popup.attr('class', '');
+	}
+
+	popup.attr('data-hide_mouseup', c.hide_on_mouseout);
+	popup.attr('data-hide_effect', c.effect);
 	popup.css({display: 'block', left: 0, opacity: 0});
 	movePopup();
-	popup.attr('data-disable_movement', disable_movement);
+	popup.attr('data-disable_movement', c.disable_movement);
 
-	if(!effect){
+	if(!c.effect){
 		popup.css({opacity: 1});
 	}else{
 		popup.animate({opacity: 1});
@@ -338,11 +344,15 @@ function hide_popup(){
 	});
 */
 	$('#message_help_button').mouseover(function(){
-		show_popup(
-			`<font>You can insert data directly from your Data Extensions using the following syntax</font>
+		show_popup({
+			data: `<font>You can insert data directly from your Data Extensions using the following syntax</font>
 			<div align="center">%%get("DE1","DE2","Field","Key1","Key2")%%</div>
 			DE1 is always the name of the DE in the Entry Source`,
-			 true, true, true, true);
+			html: true,
+			hide_on_mouseout: true, 
+			effect: true,
+			disable_movement: true
+		});
 	}).mouseout(function(){
 		
 	});
