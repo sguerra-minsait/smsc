@@ -127,7 +127,7 @@ body {
 	position: relative;
 	background: rgba(0, 112, 210, 0.3);
 	cursor: help;
-	color: white;
+	color: black;
 	padding: 0px 2px;
 	border-radius: 6px;
 	transition: all .5s;
@@ -153,13 +153,21 @@ body {
 	border-radius: 15px;
 }
 
+.de_custom_prop_comp_popup{
+	background: rgba(210, 0,0,1) !important;
+	color: white !important;
+}
+.de_custom_prop_popup{
+	background: rgba(0, 112, 210, 1) !important;
+	color: white !important;
+}
+
 
 #popup{
 	display: none;
 	position: absolute;
 	padding: 10px;
 	border-radius: 4px;
-	asdbackground: #214882;
 	background: #fff;
 	color: rgba(0, 0, 0, 0.87);
     font-family: "Salesforce Sans",Arial,sans-serif;
