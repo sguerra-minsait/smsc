@@ -5,6 +5,7 @@ console.log("Loading...");
 const security = require('./mod/security');
 const post = require('./mod/post_request');
 var parse_data_ext = require('./mod/parse_data_ext');
+var sfmc = require('./mod/sfmc')
 var port = process.env.PORT || 3000;
 
 var app = require('./mod/server');
@@ -17,24 +18,25 @@ app.post('/execute', security.check_token, (req,res) => {
 	console.log('EXECTURE BODY: ', req.rawBody, req.body);
 	var datos = req.body.inArguments[0];
 	var keys = Object.keys(datos);
-	console.log(keys);
-	console.log(datos[keys[0]]);
 	var c = 0;
 	function parse(){
 		parse_data_ext(datos[keys[c]]).then(r => {
-			console.log('parse_data_ext RESULT ', r);
 			datos[keys[c]] = r;
 			if(c == keys.length - 1){
-				return console.log(datos);
+				return console.log('FINAL DATA: ', datos);
 			}
 			c++;
 			parse();
 		}).catch(err => {
-			console.log('PARSE ERROR' + err);
+			if(err.error && err.data)sfmc.log(err).then(r => {
+				console.log(r);
+			}).catch(err => {
+				console.log(err);
+			})
+			console.log('PARSE ERROR' + JSON.stringify(err));
 		});
 	}
 	parse();
-	console.log(datos);
 });
 
 
