@@ -23,7 +23,7 @@ function sf_get(data, matches, arg){
 			
 			if(!response.Results)return reject({
 				data: matches[0],
-				error: 'NOT FOUND'
+				error: 'Error: There are no rows with the property  ' + arg[2] + ' equals to ' + arg[3] + ' found in ' + arg[0]
 			});
 
 
@@ -48,7 +48,7 @@ function make_args(d){
 
 
 module.exports = function(data){
-	var reg = /\%\%([a-zA-Z_]+) *\(((?: *"[a-zA-Z0-9_,' ]+", *)*(?:"[a-zA-Z0-9_,' ]+" *))\)\%\%/g;
+	var reg = /\%\%([a-zA-Z_]+)\(((?: *"[a-zA-Z0-9_,' ]*" *, *)*(?: *"[a-zA-Z0-9_,' ]*" *))\)\%\%/g;
 	var matches = [];
 	var match;
 	while((match = reg.exec(data)) != null)matches.push(match);
@@ -74,7 +74,3 @@ module.exports = function(data){
 	if(matches.length)return eject_f();
 	return Promise.resolve(data);
 }
-
-
-
-// propiedad1, nombre_data2, propiedad2
