@@ -15,7 +15,7 @@
 	var custom_param_reg = /\%\%([a-zA-Z_]+) *\(((?: *"[a-zA-Z0-9_,' ]+", *)*(?:"[a-zA-Z0-9_,' ]+" *))\)\%\%/g;
 
 	var document_ready = false;
-
+	var eventDefinitionKey;
 	$(window).ready(onRender);
 
 	connection.on('initActivity', initialize);
@@ -33,7 +33,8 @@
 
 	connection.on('requestedTriggerEventDefinition', function(event){
 		console.log(event);
-	})
+		eventDefinitionKey = event.eventDefinitionKey;
+	});
 
 	function short_url(url){
 		return new Promise((resolve, reject) => {
@@ -187,6 +188,7 @@
 		connection.trigger('requestTokens');
 		connection.trigger('requestEndpoints');
 		connection.trigger('updateButton', { button: 'next', enabled: true});
+		connection.trigger('requestTriggerEventDefinition');
 	}
 
 	function preview_data_div(){
@@ -372,6 +374,9 @@
 			data[i].value = lookup_custom_functions(data[i].value);
 			payload['arguments'].execute.inArguments[0][data[i].name] = data[i].value;
 		}
+
+		payload['arguments'].execute.inArguments[0]['PRUEBA'] = '{{Event.' + eventDefinitionKey + '.sent}}';
+
 		console.log(payload);
 
 		payload['metaData'].isConfigured = true;
