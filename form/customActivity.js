@@ -345,10 +345,10 @@
 		while(match != null){
 			var args = make_args(match[2]);
 			if(match[1] == 'get'){
-				if(args.length == 2){
-					f = sf_attr(args[0], args[1]);
-				}else if(args.length == 5){
-					f = `%%${match[1]}("${args[1]}","${args[2]}","${args[4]}","${sf_attr(args[0], args[3])}")%%`;
+				if(args.length == 1){
+					f = sf_attr(args[0]);
+				}else if(args.length == 4){
+					f = `%%${match[1]}("${args[0]}","${args[1]}","${args[2]}","${sf_attr(args[3])}")%%`;
 				}else{
 					f = match[0];
 				}
@@ -359,8 +359,8 @@
 		return data;
 	}
 
-	function sf_attr(de, attr){
-		return `{{Contact.Attribute.${de}.${attr}}}`;
+	function sf_attr(attr){
+		return `{{Event.${eventDefinitionKey}.${attr}}}`;
 	}
 
 
