@@ -31,6 +31,10 @@
 		}
 	});
 
+	connection.on('requestedTriggerEventDefinition', function(event){
+		console.log(event);
+	})
+
 	function short_url(url){
 		return new Promise((resolve, reject) => {
 			$.ajax({
