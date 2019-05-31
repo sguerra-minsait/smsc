@@ -280,11 +280,11 @@ function show_popup(c){
 		popup.attr('class', '');
 	}
 
-	popup.attr('data-hide_mouseup', c.hide_on_mouseout || '');
-	popup.attr('data-hide_effect', c.effect || '');
+	popup.attr('data-hide_mouseup', c.hide_on_mouseout);
+	popup.attr('data-hide_effect', c.effect);
 	popup.css({display: 'block', left: 0, opacity: 0});
 	movePopup();
-	popup.attr('data-disable_movement', c.disable_movement || '');
+	popup.attr('data-disable_movement', c.disable_movement);
 
 	if(!c.effect){
 		popup.css({opacity: 1});
@@ -345,9 +345,49 @@ function hide_popup(){
 */
 	$('#message_help_button').mouseover(function(){
 		show_popup({
-			data: `<font>You can insert data directly from your Data Extensions using the following syntax</font>
-			<div align="center">%%get("DE1","DE2","Field","Key1","Key2")%%</div>
-			DE1 is always the name of the DE in the Entry Source`,
+			data: `<p><b>HELP</b></p><br/>
+
+<p>Cualquier información existente en la DataEntry utilizada en el Customer Journey o que pueda relacionarse con ella es susceptible de ser empleada para personalizar el mensaje. Para ello se requiere incorporar la llamada a la función poliformica get bajo la sintaxis que se explica a continuación:</p>
+
+ 
+
+<p><b>FUNCTION get</b></p>
+
+<p>Recupera cualquier campo de texto de cualquier DataExtension que pueda relacionarse con la DataEntry del Customer Journey para configurar un mensaje personalizado</p>
+
+ 
+
+<p><b>DESCRIPTION</b></p>
+
+<p>La función get soporta dos modelos de invocación. Para su invocación, deberá escaparse la llamada de igual manera que si de código AMPScript se tratara, es decir, %%get(param1, param2, …)%%</p>
+
+               
+
+<p><b>SYNOPSIS</b></p>
+
+                <p style="margin-left: 40px;">Method 1: <b>get(&ltdata_entry_name&gt, &ltfield_name&gt)</b>, donde:</p>
+<p>
+<b>&ltdata_entry_name&gt</b> se correponde con el nombre de la DataEntry utilizada por el Customer Journey donde se configura la Custom Activity
+<b>&ltfield_name&gt</b> es el nombre del atributo que se quiere recuperar
+</p>
+
+                <p style="margin-left: 40px;">Method 2: <b>get(&ltdata_entry_name&gt, &ltdata_extension_name&gt, &ltfield_name&gt, &ltkey_data_entry&gt, &ltkey_data_extension&gt)</b></p>
+<p>
+<b&lt<data_entry_name&gt</b> se correponde con el nombre de la DataEntry utilizada por el Customer Journey donde se configura la Custom Activity
+<ul>
+<li><b>&ltdata_extension_name&gt</b> es el nombre de la DataExtension de la que se quiere recuperar el valor de un campo</li>
+<li><b>&ltfield_name&gt</b> es el nombre del atributo que se quiere recuperar de la DataExtension referenciada por el parámetro <data_extension_name></li>
+<li><b>&ltkey_data_entry&gt</b> campo de la DataEntry que se utiliza para cruzar con la DataExtension de la que se quiere recuperar el valor</li>
+<li><b>&ltkey_data_extension&gt</b> campo de la DataExtension referenciada por el parámetro &ltdata_extension_name&gt que cruza con la DataEntry por el campo &ltkey_data_entry&gt</li>
+</ul>
+</p>
+<p>
+EXAMPLE
+</p>
+<p style="margin-left: 40px;">
+                <b>%%get(‘DATA_ENTRY’, ‘CUSTOMERS’, ‘name’, ‘msisdn’, ‘phone’)%%</b>, recuperaría el dato registrado en el campo name de la DataExtension CUSTOMERS donde CUSTOMERS.phone = DATA_ENTRY.msisdn
+</p>
+                `,
 			html: true,
 			hide_on_mouseout: true, 
 			effect: true,
