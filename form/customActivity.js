@@ -12,7 +12,7 @@
 	var heroku_url = 'https://pushintegration.herokuapp.com';
 	//var url_reg = /(https?\:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
 	var url_reg = /((https?\:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
-	var custom_param_reg = /\%\%([a-zA-Z_]+) *\(((?: *"[a-zA-Z0-9_,' ]+", *)*(?:"[a-zA-Z0-9_,' ]+" *))\)\%\%/g;
+	var custom_param_reg = /\%\%([a-zA-Z_]+)\(((?: *"[a-zA-Z0-9_,' ]*" *, *)*(?: *"[a-zA-Z0-9_,' ]*" *))\)\%\%/g;
 
 	var document_ready = false;
 	var eventDefinitionKey;
