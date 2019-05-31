@@ -231,10 +231,12 @@
 			if(!match || match[1] != 'get')continue;
 			var args = make_args(match[2]);
 			
-			if(args.length == 2){
-				container.append(create_div(match[0], args[1], 'de_custom_prop_popup'));
+			if(args.length == 1){
+				container.append(create_div(match[0], args[0], 'de_custom_prop_popup'));
+			}else if(args.length == 4){
+				container.append(create_div(match[0], args[1], 'de_custom_prop_comp_popup', 'de_custom_prop_comp'));
 			}else{
-				container.append(create_div(match[0], args[2], 'de_custom_prop_comp_popup', 'de_custom_prop_comp'));
+				container.append(create_div(match[0], 'Invalid number of arguments', '', 'de_custom_prop_error'));
 			}
 		}while(match != null);
 		container.append(create_font(footer));
