@@ -10,9 +10,10 @@
 		{ "label": "Testing", "key": "testing" }
 	];
 	var heroku_url = 'https://pushintegration.herokuapp.com';
+	var custom_get = 'get';
 	//var url_reg = /(https?\:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
 	var url_reg = /((https?\:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
-	var custom_param_reg = /\%\%([a-zA-Z_]+)\(((?: *"[a-zA-Z0-9_,' ]*" *, *)*(?: *"[a-zA-Z0-9_,' ]*" *))\)\%\%/g;
+	var custom_param_reg = /\%\%([a-zA-Z_]+)\(((?: *(["'`])[a-zA-Z0-9_,. ]*\3 *, *)*(?: *(["`'])[a-zA-Z0-9_,. ]*\4 *))\)\%\%/g;
 
 	var document_ready = false;
 	var eventDefinitionKey;
@@ -228,7 +229,7 @@
 
 			container.append(create_font(message.substring(lastIndex, index)));
 			
-			if(!match || match[1] != 'get')continue;
+			if(!match || match[1] != custom_get)continue;
 			var args = make_args(match[2]);
 			
 			if(args.length == 1){
@@ -346,7 +347,7 @@
 		
 		while(match != null){
 			var args = make_args(match[2]);
-			if(match[1] == 'get'){
+			if(match[1] == custom_get){
 				if(args.length == 1){
 					f = sf_attr(args[0]);
 				}else if(args.length == 4){
@@ -377,7 +378,6 @@
 			payload['arguments'].execute.inArguments[0][data[i].name] = data[i].value;
 		}
 
-		payload['arguments'].execute.inArguments[0]['PRUEBA'] = '{{Event.' + eventDefinitionKey + '.sent}}';
 
 		console.log(payload);
 
