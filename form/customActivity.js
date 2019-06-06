@@ -230,7 +230,7 @@
 			return div;
 		}
 
-
+		custom_prop_error = false; 
 		do{
 			lastIndex = custom_param_reg.lastIndex;
 			var match = custom_param_reg.exec(message);
