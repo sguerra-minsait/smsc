@@ -264,7 +264,7 @@
 
 
 <div id="custom_prop_doc" style="display: none;">
-	<p><b>HELP</b></p><br/>
+	<p><b>HELP</b></p>
 
 	<p>Cualquier información existente en la DataEntry utilizada en el Customer Journey o que pueda relacionarse con ella es susceptible de ser empleada para personalizar el mensaje. Para ello se requiere incorporar la llamada a la función poliformica get bajo la sintaxis que se explica a continuación:</p>
 
@@ -277,13 +277,17 @@
 
 	<p><b>SYNOPSIS</b></p>
 
-	<p style="margin-left: 40px;">Method 1: <b>get(&ltfield_name&gt)</b>, donde:</p>
+	<p style="">Method 1: <b>get(&ltfield_name&gt)</b>, donde:</p>
 	<p>
-		<b>&ltfield_name&gt</b> es el nombre del atributo que se quiere recuperar
+		<ul style="list-style-type: circle;margin-left: 20px;">
+			<li><b>&ltfield_name&gt</b> es el nombre del atributo que se quiere recuperar</li>
+		</ul>
 	</p>
-	<p style="margin-left: 40px;">Method 2: <b>get(&ltdata_entry_name&gt, &ltdata_extension_name&gt, &ltfield_name&gt, &ltkey_data_entry&gt, &ltkey_data_extension&gt)</b></p>
+
+
+	<p style="">Method 2: <b>get(&ltdata_entry_name&gt, &ltdata_extension_name&gt, &ltfield_name&gt, &ltkey_data_entry&gt, &ltkey_data_extension&gt)</b></p>
 	<p>
-		<ul>
+		<ul style="list-style-type: circle; margin-left: 20px;">
 			<li><b>&ltdata_extension_name&gt</b> es el nombre de la DataExtension de la que se quiere recuperar el valor de un campo</li>
 			<li><b>&ltfield_name&gt</b> es el nombre del atributo que se quiere recuperar de la DataExtension referenciada por el parámetro <data_extension_name></li>
 			<li><b>&ltkey_data_extension&gt</b> campo de la DataExtension referenciada por el parámetro &ltdata_extension_name&gt que cruza con la DataEntry por el campo &ltkey_data_entry&gt</li>
@@ -293,7 +297,7 @@
 	<p>
 	EXAMPLE
 	</p>
-	<p style="margin-left: 40px;">
+	<p style="margin-left: 30px;">
 		<b>%%get(‘CUSTOMERS’, ‘name’, ‘phone’, ‘msisdn’)%%</b>, recuperaría el dato registrado en el campo name de la DataExtension CUSTOMERS donde CUSTOMERS.phone = DATA_ENTRY.msisdn
 	</p>
 </div>
