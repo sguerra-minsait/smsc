@@ -297,7 +297,7 @@
 				var inArguments = payload.configurationArguments.save.inArguments[0];
 				for(var name in inArguments){
 					var el = $('[name="' + name + '"]');
-					if(el.attr('type') == 'checkbox')el.prop('checkbox', 'checkbox');else el.val(inArguments[name]);
+					if(el.attr('type') == 'checkbox')el.prop('checked', 'checked');else el.val(inArguments[name]);
 				}
 			}catch(err){}
 			clearInterval(tmp_int);
