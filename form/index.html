@@ -80,7 +80,7 @@
 <div class="slds-form-element">
 	<div class="slds-form-element__control">
 		<div class="slds-checkbox">
-			<input type="checkbox" id="expiration_date_checkbox" name="expiration_date_checkbox" value="true" checked="checked" />
+			<input type="checkbox" id="expiration_date_checkbox" name="expiration_date_checkbox" value="true" />
 			<label class="slds-checkbox__label" for="expiration_date_checkbox">
 				<span class="slds-checkbox_faux"></span>
 				<span class="slds-form-element__label">Expiration date</span>
@@ -91,7 +91,7 @@
 	<div id="maintain_date" style="display: inline-block;">
 	  <div class="slds-form-element slds-dropdown-trigger slds-dropdown-trigger_click">
 		<div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_right custom_calendar_input_container" style="display: inline-block;">
-		  <input type="text" placeholder=" " class="slds-input" value="" id="maintain_date_value" name="maintain_date_value" />
+		  <input type="text" placeholder=" " class="slds-input" value="" id="maintain_date_value" disabled="disabled" name="maintain_date_value" />
 		  <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right" title="Select a date">
 			<svg class="slds-button__icon" aria-hidden="true">
 			  <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#event"></use>
@@ -161,7 +161,7 @@
 		</div>
 		<div style="display: inline-block;">
 			<div style="position: relative">
-				<select id="maintain_hour" name="maintain_hour" class="select_time_picker"></select>
+				<select id="maintain_hour" name="maintain_hour" disabled="disabled" class="select_time_picker"></select>
 				<span class="slds-icon_container maintain_hour_icon slds-icon-utility-clock slds-input__icon slds-input__icon_right"><svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true"><use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#clock"></use></svg></span>
 			</div>
 		</div>
