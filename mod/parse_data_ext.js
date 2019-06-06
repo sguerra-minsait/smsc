@@ -1,7 +1,7 @@
 var wsdlParser = require("wsdlrdr");
 var soap = require('./soap');
 
-var reg = /\%\%([a-zA-Z_]+)\(((?: *(["'`])[a-zA-Z0-9_,. ]*\3 *, *)*(?: *(["`'])[a-zA-Z0-9_,. ]*\4 *))\)\%\%/g;
+var reg = /\%\%([a-zA-Z_]+)\(((?: *(["'`])((?:(?!\3)[a-zA-Z0-9_,. '"`])*)\3 *, *)*(?: *(["`'])((?:(?!\5)[a-zA-Z0-9_,. '"`])*)\5]* *))\)\%\%/g;
 
 function sf_get(data, matches, arg){
 	var body = soap.data.get_value
@@ -39,12 +39,11 @@ function sf_get(data, matches, arg){
 }
 
 function make_args(d){
-	var arg = d.split('",');
-	for(let i = 0;i < arg.length;i++){
-		arg[i] = arg[i].trim();
-		arg[i] = (i != arg.length - 1 ? arg[i].slice(1) : arg[i].slice(1, arg[i].length - 1));
-	}
-	return arg;
+	var args = [];
+	var arg;
+	var reg = /(['"`])((?:(?!\1).)*)\1/g;
+	while((arg = reg.exec(d)) != null)args.push(arg[2].trim());
+	return args;
 }
 
 

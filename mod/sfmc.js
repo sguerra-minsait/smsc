@@ -65,7 +65,6 @@ module.exports = {
 		});
 	},
 	log(c){
-		console.log('logging', c);
 		return module.exports.rest_request({
 			url: '/hub/v1/dataevents/key:' + process.env.log_DE + '/rowset',
 			body: [{

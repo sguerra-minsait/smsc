@@ -23,16 +23,14 @@ app.post('/execute', security.check_token, (req,res) => {
 		parse_data_ext(datos[keys[c]]).then(r => {
 			datos[keys[c]] = r;
 			if(c == keys.length - 1){
+				res.status(200).end();
 				return console.log('FINAL DATA: ', datos);
 			}
 			c++;
 			parse();
 		}).catch(err => {
-			if(err.error && err.data)sfmc.log(err).then(r => {
-				console.log(r);
-			}).catch(err => {
-				console.log(err);
-			})
+			sfmc.log(err.error && err.data ? err : {error: JSON.stringify(err)});
+			res.status(200).end();
 			console.log('PARSE ERROR' + JSON.stringify(err));
 		});
 	}

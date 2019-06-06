@@ -13,7 +13,7 @@
 	var custom_get = 'get';
 	//var url_reg = /(https?\:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
 	var url_reg = /((https?\:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
-	var custom_param_reg = /\%\%([a-zA-Z_]+)\(((?: *(["'`])[a-zA-Z0-9_,. ]*\3 *, *)*(?: *(["`'])[a-zA-Z0-9_,. ]*\4 *))\)\%\%/g;
+	var custom_param_reg = /\%\%([a-zA-Z_]+)\(((?: *(["'`])((?:(?!\3)[a-zA-Z0-9_,. '"`])*)\3 *, *)*(?: *(["`'])((?:(?!\5)[a-zA-Z0-9_,. '"`])*)\5]* *))\)\%\%/g;
 
 	var document_ready = false;
 	var eventDefinitionKey;
@@ -334,12 +334,11 @@
 		connection.trigger('ready');
 	}
 	function make_args(d){
-		var arg = d.split('",');
-		for(let i = 0;i < arg.length;i++){
-			arg[i] = arg[i].trim();
-			arg[i] = (i != arg.length - 1 ? arg[i].slice(1) : arg[i].slice(1, arg[i].length - 1));
-		}
-		return arg;
+		var args = [];
+		var arg;
+		var reg = /(['"`])((?:(?!\1).)*)\1/g;
+		while((arg = reg.exec(d)) != null)args.push(arg[2].trim());
+		return args;
 	}
 	function lookup_custom_functions(data){
 		var match, f;

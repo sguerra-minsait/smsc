@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+function make_args(d){
+	var arg = d.split('",');
+	for(let i = 0;i < arg.length;i++){
+		arg[i] = arg[i].trim();
+		arg[i] = (i != arg.length - 1 ? arg[i].slice(1) : arg[i].slice(1, arg[i].length - 1));
+	}
+	return arg;
+}
+function lookup_custom_functions(data){
+	var reg = /\%\%([a-zA-Z_]+) *\(((?: *"[a-zA-Z0-9_,' ]+", *)*(?:"[a-zA-Z0-9_,' ]+" *))\)\%\%/g;
+	var matches = Array.from(data.matchAll(reg));
+	var f;
+	for(let i = 0;i < matches.length;i++){
+		var match = matches[i];
+		var args = make_args(match[2]);
+		if(match[1] == 'get'){
+			if(args.length == 2){
+				f = sf_attr(args[0], args[1]);
+			}else if(args.length == 5){
+				f = `%%${match[1]}("${args[1]}","${args[2]}","${args[4]}","${sf_attr(args[0], args[3])}")%%`;
+			}else{
+				f = match[0];
+			}
+			data = data.replace(match[0], f);
+		}
+	}
+	return data;
+}
+
+function sf_attr(de, attr){
+	return `{{Contact.Attribute.${de}.${attr}}}`;
+}
+
+
+var r = lookup_custom_functions('El mensaje con id %%get("DE1", "DE2", "PRO", "KEY1", "KEY2")%% fue enviado el dia %%get("prueba1", "dia")%%');
+console.log(r);
+</script>
+</body>
+</html>
