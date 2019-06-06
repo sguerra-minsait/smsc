@@ -80,7 +80,7 @@
 <div class="slds-form-element">
 	<div class="slds-form-element__control">
 		<div class="slds-checkbox">
-			<input type="checkbox" name="options" id="expiration_date_checkbox" value="true" checked="checked" />
+			<input type="checkbox" name="options" id="expiration_date_checkbox" name="expiration_date_checkbox" value="true" checked="checked" />
 			<label class="slds-checkbox__label" for="expiration_date_checkbox">
 				<span class="slds-checkbox_faux"></span>
 				<span class="slds-form-element__label">Expiration date</span>
@@ -161,7 +161,7 @@
 		</div>
 		<div style="display: inline-block;">
 			<div style="position: relative">
-				<select id="maintain_hour" class="select_time_picker"></select>
+				<select id="maintain_hour" name="maintain_hour" class="select_time_picker"></select>
 				<span class="slds-icon_container maintain_hour_icon slds-icon-utility-clock slds-input__icon slds-input__icon_right"><svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true"><use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#clock"></use></svg></span>
 			</div>
 		</div>
@@ -283,7 +283,6 @@
 			<li><b>&ltfield_name&gt</b> es el nombre del atributo que se quiere recuperar</li>
 		</ul>
 	</p>
-
 
 	<p style="">Method 2: <b>get(&ltdata_entry_name&gt, &ltdata_extension_name&gt, &ltfield_name&gt, &ltkey_data_entry&gt, &ltkey_data_extension&gt)</b></p>
 	<p>
