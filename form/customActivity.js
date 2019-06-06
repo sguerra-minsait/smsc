@@ -321,11 +321,12 @@
 					errors.push({id: 'sender', error: 'Please, select your sender!'});				
 			break;
 			case 3:
-				if(custom_prop_error)errors.push({id: ''});
+				if(custom_prop_error)errors.push({id: false});
 		}
 		return errors;
 	}
 	function show_error(id, msg){
+		if(!id)return;
 		var parent = $('#' + id).closest('.slds-form-element');
 		parent.find('.slds-text-color_error').text(msg).show();
 		parent.addClass('slds-has-error');
