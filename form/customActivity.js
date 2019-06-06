@@ -14,6 +14,8 @@
 	//var url_reg = /(https?\:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
 	var url_reg = /((https?\:\/\/)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))/g;
 	var custom_param_reg = /\%\%([a-zA-Z_]+)\(((?: *(["'`])((?:(?!\3)[a-zA-Z0-9_,. '"`])*)\3 *, *)*(?: *(["`'])((?:(?!\5)[a-zA-Z0-9_,. '"`])*)\5]* *))\)\%\%/g;
+	var custom_prop_error = false;
+
 
 	var document_ready = false;
 	var eventDefinitionKey;
@@ -215,29 +217,52 @@
 		}
 		function create_div(full, prop, css_class_popup, css_class){
 			full = full.substring(2, full.length - 2);
-			return $(`
-				<div class="de_custom_prop ${css_class || ''}" onmouseover="show_popup({data:'${encodeURIComponent(full)}', class:'${css_class_popup}'})" onmouseout="hide_popup()">
+			var div =  $(`
+				<div class="de_custom_prop ${css_class || ''}" onmouseout="hide_popup()">
 					<div class="de_custom_prop_data">${prop}</div>
 				</div>`);
+			div.mouseover(function(){
+				show_popup({
+					data: full,
+					class: css_class_popup
+				});
+			});
+			return div;
 		}
 
 
 		do{
 			lastIndex = custom_param_reg.lastIndex;
 			var match = custom_param_reg.exec(message);
+			var append = null;
 			index = match ? match.index : message.length;
 
 			container.append(create_font(message.substring(lastIndex, index)));
 			
-			if(!match || match[1] != custom_get)continue;
-			var args = make_args(match[2]);
-			
-			if(args.length == 1){
-				container.append(create_div(match[0], args[0], 'de_custom_prop_popup'));
-			}else if(args.length == 4){
-				container.append(create_div(match[0], args[1], 'de_custom_prop_comp_popup', 'de_custom_prop_comp'));
-			}else{
-				container.append(create_div(match[0], 'Invalid number of arguments', '', 'de_custom_prop_error'));
+			if(match){
+				var args = make_args(match[2]);
+				switch(match[1]){
+					case 'get':
+						if(args.length == 1){
+							append = create_div(match[0], args[0], 'de_custom_prop_popup');
+						}else if(args.length == 4){
+							append = create_div(match[0], args[1], 'de_custom_prop_popup');
+						}else{
+							append = create_div(match[0], 'Error: "get" function accepts only 2 or 4 arguments', 'de_custom_prop_comp_popup', 'de_custom_prop_comp');
+							custom_prop_error = true;
+						}
+					break;
+					default:
+						append = create_div(match[0], `Error: Function "${match[1]}" is not recognized`, 'de_custom_prop_comp_popup', 'de_custom_prop_comp');
+						custom_prop_error = true;
+					break;
+				}
+
+				if(!append){
+					append = create_div(match[0], "Error", 'de_custom_prop_comp_popup', 'de_custom_prop_comp');
+					custom_prop_error = true;
+				}
+				container.append(append);
 			}
 		}while(match != null);
 		container.append(create_font(footer));
@@ -283,7 +308,6 @@
 			case 1:
 				if($('#message').val().length < 1)
 					errors.push({id: 'message', error: 'Please, fill your message!'});
-				//if($('#footer').val().length < 1)errors.push('fill your footer');
 			break;
 			case 2:
 				var date = new Date($('#maintain_date_value').val());
@@ -296,6 +320,8 @@
 				if($('#sender').val().length < 1)
 					errors.push({id: 'sender', error: 'Please, select your sender!'});				
 			break;
+			case 3:
+				if(custom_prop_error)errors.push({id: ''});
 		}
 		return errors;
 	}
