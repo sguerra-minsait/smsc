@@ -319,7 +319,7 @@
 				var date = new Date($('#maintain_date_value').val());
 				var now = new Date();
 				now = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-				if(date.getTime() < now.getTime())
+				if(date.getTime() < now.getTime() && !$('#maintain_date_value').attr('disabled'))
 					errors.push({id: 'maintain_date_value', error: 'The date is prior to the current'});
 				if($('#type').val().length < 1)
 					errors.push({id: 'type', error: 'Please, select your type!'});
