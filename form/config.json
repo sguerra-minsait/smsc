@@ -17,7 +17,7 @@
 						"inArguments": [],
 						"outArguments": [
 						],
-						"url": "https://pushintegration.herokuapp.com/execute",
+						"url": "https://minsait-smsc-ca.herokuapp.com/execute",
 						"useJwt": true,
 						"body": "",
 						"method": "POST"
@@ -26,19 +26,19 @@
 		"configurationArguments": {
 			"applicationExtensionKey": "486ad3cc-bc11-44d3-89f0-08eb27820948",
 			 "save": {
-					 "url": "https://pushintegration.herokuapp.com/save",
+					 "url": "https://minsait-smsc-ca.herokuapp.com/save",
 					 "verb": "POST",
 					 "body": "",
 					 "useJwt": true
 			 },
 			 "publish": {
-					 "url": "https://pushintegration.herokuapp.com/publish",
+					 "url": "https://minsait-smsc-ca.herokuapp.com/publish",
 					 "verb": "POST",
 					 "body": "",
 					 "useJwt": true
 			 },
 			 "validate": {
-					 "url": "https://pushintegration.herokuapp.com/validate",
+					 "url": "https://minsait-smsc-ca.herokuapp.com/validate",
 					 "verb": "POST",
 					 "body": "",
 					 "useJwt": true
